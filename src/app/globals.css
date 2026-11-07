@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Noto+Sans+Kannada:wght@300;400;500;600;700&family=Noto+Serif+Kannada:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-lato: 'Lato', sans-serif;
+  --font-noto-serif-kannada: 'Noto Serif Kannada', serif;
+  --font-noto-sans-kannada: 'Noto Sans Kannada', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: #F8F1E5;
+  color: #382A24;
+  overflow-x: hidden;
+  font-family: var(--font-lato), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Royal Gold Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8F1E5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B89555;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #96753A;
+}
+
+/* Gold Text Shimmer */
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    #B89555 0%,
+    #FDFBF7 50%,
+    #B89555 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Kannada Unicode Enhancements */
+.font-kannadaSerif,
+.font-kannadaSans {
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* Prevent unwanted mobile callout & tap highlight */
+a, button {
+  -webkit-tap-highlight-color: transparent;
+}
+
