@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Heart, Sparkles } from "lucide-react";
 
 // ==========================================
@@ -360,12 +360,19 @@ export const AnimatedLetterText: React.FC<{
   text?: string;
   className?: string;
   delay?: number;
-}> = ({ text, className = "", delay = 0 }) => {
-  if (!text || typeof text !== "string") return null;
+}> = ({ text = "", className = "", delay = 0 }) => {
+  const containerRef = React.useRef<HTMLSpanElement>(null);
+  const isInView = useInView(containerRef, { once: true });
 
-  // Split safely by grapheme clusters so Kannada aksharas (consonants + matras + viramas) stay unified
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const isKannada = /[\u0C80-\u0CFF]/.test(text);
+
+  // For Kannada, split by words to preserve complex font shaping, samyuktaksharas (conjuncts), and otthaksharas
+  // For Latin / English, split by grapheme clusters for character-level pop-in animation
   const units = React.useMemo(() => {
+    if (!text) return [];
+    if (isKannada) {
+      return text.split(/(\s+)/);
+    }
     try {
       if (typeof Intl !== "undefined" && "Segmenter" in Intl) {
         // @ts-ignore
@@ -375,14 +382,14 @@ export const AnimatedLetterText: React.FC<{
       }
     } catch {}
     return Array.from(text);
-  }, [text]);
+  }, [text, isKannada]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.035,
+        staggerChildren: isKannada ? 0.08 : 0.035,
         delayChildren: delay,
       },
     },
@@ -391,9 +398,9 @@ export const AnimatedLetterText: React.FC<{
   const letterVariants = {
     hidden: {
       opacity: 0,
-      y: 16,
-      scale: 0.7,
-      rotate: -6,
+      y: 14,
+      scale: isKannada ? 0.85 : 0.7,
+      rotate: isKannada ? 0 : -5,
     },
     visible: {
       opacity: 1,
@@ -408,24 +415,39 @@ export const AnimatedLetterText: React.FC<{
     },
   };
 
+  if (!text || typeof text !== "string") return null;
+
   return (
-    <motion.span
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-20px" }}
-      className={`inline-block ${className}`}
-    >
-      {units.map((unit: string, index: number) => (
-        <motion.span
-          key={`${unit}-${index}`}
-          variants={letterVariants}
-          className="inline-block whitespace-pre"
-        >
-          {unit === " " ? "\u00A0" : unit}
-        </motion.span>
-      ))}
-    </motion.span>
+    <span ref={containerRef} className={`inline-block ${className}`}>
+      <motion.span
+        key={text}
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        className="inline-block"
+      >
+        {units.map((unit: string, index: number) => {
+          if (!unit) return null;
+          const isSpace = /^\s+$/.test(unit);
+          if (isSpace) {
+            return (
+              <span key={`space-${index}`} className="inline-block whitespace-pre">
+                {unit === " " ? "\u00A0" : unit}
+              </span>
+            );
+          }
+          return (
+            <motion.span
+              key={`u-${index}-${unit}`}
+              variants={letterVariants}
+              className="inline-block whitespace-pre"
+            >
+              {unit}
+            </motion.span>
+          );
+        })}
+      </motion.span>
+    </span>
   );
 };
 
