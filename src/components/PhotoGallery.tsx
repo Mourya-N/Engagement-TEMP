@@ -148,7 +148,7 @@ export const PhotoGallery: React.FC = () => {
                   <span className="text-xs font-serif italic text-gold-light">
                     {t(photo.captionKey as any)}
                   </span>
-                  <div className="absolute top-3 right-3 p-1.5 rounded-full bg-ivory/20 backdrop-blur-xs text-ivory">
+                  <div className="absolute top-3 right-3 p-1.5 rounded-full bg-ivory/20 backdrop-blur-sm text-ivory">
                     <Maximize2 className="w-4 h-4 text-gold-light" />
                   </div>
                 </div>

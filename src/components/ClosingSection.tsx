@@ -6,6 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { INVITATION_CONFIG } from "@/config/invitation";
 import { RoyalDivider, RoyalCornerFlourish } from "./DecorativeBorders";
 import { RoyalMonogramLogo } from "./RoyalMonogramLogo";
+import { RealisticRose, RealisticOrchid, AnimatedLetterText } from "./RoyalFlorals";
 import { Heart, Share2, Check, MessageCircle } from "lucide-react";
 
 export const ClosingSection: React.FC = () => {
@@ -73,7 +74,7 @@ export const ClosingSection: React.FC = () => {
           {t("closingBlessing")}
         </motion.p>
 
-        {/* Closing Title */}
+        {/* Closing Title with Letters Pop-in */}
         <motion.h2
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -83,7 +84,7 @@ export const ClosingSection: React.FC = () => {
             isKannada ? "font-kannadaSerif" : ""
           }`}
         >
-          {t("closingHeading")}
+          <AnimatedLetterText text={t("closingHeading")} />
         </motion.h2>
 
         <RoyalDivider variant="kalash" className="text-gold" />
@@ -95,27 +96,35 @@ export const ClosingSection: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
           className={`text-sm sm:text-base md:text-lg text-ivory/85 leading-relaxed font-serif italic mb-8 max-w-xl mx-auto ${
-            isKannada ? "font-kannadaSerif not-italic" : ""
+            isKannada ? "font-kannadaSerif not-italic leading-[1.85]" : ""
           }`}
         >
           &ldquo;{t("closingMessage")}&rdquo;
         </motion.p>
 
-        {/* Couple Signature Monogram Badge */}
+        {/* Couple Signature Monogram Badge with Realistic Floral Flankers */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="my-4 inline-flex flex-col items-center"
+          className="my-4 inline-flex flex-col items-center relative"
         >
+          {/* Subtle realistic botanical flankers */}
+          <div className="absolute -left-10 top-2 pointer-events-none opacity-85 hidden sm:block">
+            <RealisticRose color="ruby" size={32} />
+          </div>
+          <div className="absolute -right-10 top-2 pointer-events-none opacity-85 hidden sm:block">
+            <RealisticOrchid size={32} />
+          </div>
+
           <div className="p-2 rounded-full border-2 border-gold flex items-center justify-center bg-espresso-light mb-3 shadow-royal-gold">
             <RoyalMonogramLogo size="lg" isKannada={isKannada} variant="crest" />
           </div>
 
           <h3
             className={`text-2xl sm:text-3xl font-serif font-bold text-gold-light ${
-              isKannada ? "font-kannadaSerif" : ""
+              isKannada ? "font-kannadaDisplay leading-normal py-1" : ""
             }`}
           >
             {isKannada
@@ -123,13 +132,15 @@ export const ClosingSection: React.FC = () => {
               : `${couple.bride.fullName} & ${couple.groom.fullName}`}
           </h3>
 
-          <p
-            className={`text-xs uppercase tracking-widest text-ivory/70 mt-1 font-semibold ${
-              isKannada ? "font-kannadaSans normal-case text-sm" : ""
-            }`}
-          >
-            {t("closingFamilySign")}
-          </p>
+          <div className="mt-3 px-6 py-2.5 rounded-full border border-gold/50 bg-gold/10 backdrop-blur-sm shadow-xs">
+            <p
+              className={`text-xs sm:text-sm uppercase tracking-widest text-gold-light font-bold ${
+                isKannada ? "font-kannadaDisplay normal-case text-sm sm:text-base tracking-normal font-semibold" : ""
+              }`}
+            >
+              {t("closingFamilySign")}
+            </p>
+          </div>
         </motion.div>
 
         {/* Share Invitation Buttons */}
@@ -171,7 +182,7 @@ export const ClosingSection: React.FC = () => {
             ↑ {isKannada ? "ಮೇಲಕ್ಕೆ ಹೋಗಿ" : "Back to top"}
           </button>
           <p className="text-[11px] text-ivory/50 flex items-center gap-1.5 mt-2">
-            <span>Crafted with devotion & royal elegance</span>
+            <span>Crafted with devotion &amp; royal elegance by MOUU</span>
             <Heart className="w-3 h-3 text-burgundy-light fill-burgundy" />
           </p>
         </div>

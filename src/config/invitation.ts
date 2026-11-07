@@ -16,8 +16,8 @@ export interface InvitationConfig {
       fatherKn: string;
       mother: string;
       motherKn: string;
-      brother: string;
-      brotherKn: string;
+      brother?: string;
+      brotherKn?: string;
       parents: string;
       parentsKn: string;
       familyTitle: string;
@@ -45,6 +45,14 @@ export interface InvitationConfig {
     monogramKn: string;
     heroImage: string;
     storyImage: string;
+    childhood?: {
+      brideImage: string;
+      groomImage: string;
+      brideAgeText: string;
+      brideAgeTextKn: string;
+      groomAgeText: string;
+      groomAgeTextKn: string;
+    };
   };
   event: {
     title: string;
@@ -66,6 +74,9 @@ export interface InvitationConfig {
     city: string;
     cityKn: string;
     googleMapsUrl: string;
+    googleMapsSearchUrl?: string;
+    googleMapsDirectionsUrl?: string;
+    embedMapUrl?: string;
     dressCode: string;
     dressCodeKn: string;
     schedule: ScheduleItem[];
@@ -103,13 +114,11 @@ export const INVITATION_CONFIG: InvitationConfig = {
       fatherKn: "ಶ್ರೀ ಹರುವೆ ಗೌಡ ಜಿ. ಜೆ.",
       mother: "Smt. Pankaja J C",
       motherKn: "ಶ್ರೀಮತಿ ಪಂಕಜ ಜೆ. ಸಿ.",
-      brother: "Koushik G H",
-      brotherKn: "ಕೌಶಿಕ್ ಜಿ. ಎಚ್.",
       parents: "Daughter of Smt. Pankaja J C & Sri. Haruve Gowda G J",
       parentsKn: "ಶ್ರೀಮತಿ ಪಂಕಜ ಜೆ. ಸಿ. ಮತ್ತು ಶ್ರೀ ಹರುವೆ ಗೌಡ ಜಿ. ಜೆ. ಅವರ ಪ್ರೀತಿಯ ಸುಪುತ್ರಿ",
       familyTitle: "Bride's Family",
       familyTitleKn: "ವಧುವಿನ ಕುಟುಂಬ",
-      image: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1000&q=80",
+      image: "/images/kavana-portrait.jpg",
       bioKey: "brideBio",
     },
     groom: {
@@ -125,13 +134,21 @@ export const INVITATION_CONFIG: InvitationConfig = {
       parentsKn: "ಶ್ರೀಮತಿ ಕೋಮಲ ಡಿ. ಎಸ್. ಮತ್ತು ಶ್ರೀ ಲಕ್ಷ್ಮಣ್ ಜಿ. ಡಿ. ಅವರ ಪ್ರೀತಿಯ ಸುಪುತ್ರ",
       familyTitle: "Groom's Family",
       familyTitleKn: "ವರನ ಕುಟುಂಬ",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80",
+      image: "/images/sweekar-portrait.jpg",
       bioKey: "groomBio",
     },
     monogram: "K & S",
     monogramKn: "ಕ & ಸ್ವ",
-    heroImage: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1800&q=85",
-    storyImage: "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1400&q=85",
+    heroImage: "/images/couple-hero.jpg",
+    storyImage: "/images/couple-hero.jpg",
+    childhood: {
+      brideImage: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=85",
+      groomImage: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=85",
+      brideAgeText: "Sweet Childhood Memories",
+      brideAgeTextKn: "ಮುದ್ದು ಬಾಲ್ಯದ ಸವಿನೆನಪು",
+      groomAgeText: "Golden Childhood Days",
+      groomAgeTextKn: "ಬಂಗಾರದ ಬಾಲ್ಯದ ದಿನಗಳು",
+    },
   },
   event: {
     title: "Engagement Ceremony",
@@ -152,7 +169,10 @@ export const INVITATION_CONFIG: InvitationConfig = {
     addressKn: "ಚನ್ನರಾಯಪಟ್ಟಣ, ಹಾಸನ, ಕರ್ನಾಟಕ",
     city: "Channarayapatna, Hassan",
     cityKn: "ಚನ್ನರಾಯಪಟ್ಟಣ, ಹಾಸನ",
-    googleMapsUrl: "https://maps.app.goo.gl/HYsMCpFWu63V42vh9?g_st=ac",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Nandagokula+Party+Hall+Channarayapatna",
+    googleMapsSearchUrl: "https://www.google.com/maps/search/?api=1&query=Nandagokula+Party+Hall+Channarayapatna",
+    googleMapsDirectionsUrl: "https://www.google.com/maps/dir/?api=1&destination=12.898681,76.391895",
+    embedMapUrl: "https://maps.google.com/maps?q=Nandagokula%20Party%20Hall%2C%20Channarayapatna%2C%20Karnataka&t=&z=15&ie=UTF8&iwloc=&output=embed",
     dressCode: "Traditional Indian / Festive Ethnic",
     dressCodeKn: "ಭವ್ಯ ಸಾಂಪ್ರದಾಯಿಕ ಉಡುಪು / ರೇಷ್ಮೆ ವಸ್ತ್ರ",
     schedule: [
@@ -197,9 +217,9 @@ export const INVITATION_CONFIG: InvitationConfig = {
     whatsappPrefillTextKn: "ನಮಸ್ಕಾರ, ಕವನ ಮತ್ತು ಸ್ವೀಕಾರ್ ಅವರ ನಿಶ್ಚಿತಾರ್ಥ ಸಮಾರಂಭಕ್ಕೆ ನಾನು ಸಂತೋಷದಿಂದ RSVP ದೃಢೀಕರಿಸುತ್ತಿದ್ದೇನೆ.",
   },
   audio: {
-    src: "https://assets.mixkit.co/music/preview/mixkit-serene-indian-sitar-and-tabla-meditation-2882.mp3",
-    title: "Mangala Nadaswaram & Sitar",
-    artist: "Auspicious Heritage Melody",
+    src: "/audio/radhe-wedding-song.m4a",
+    title: "Radhe - The Wedding Song",
+    artist: "Ibbani Tabbida Ileyali (Gagan Baderiya)",
     autoPlayPrompt: true,
   },
 };

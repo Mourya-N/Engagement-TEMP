@@ -36,7 +36,7 @@ export const GALLERY_CONFIG: {
       captionKey: "galleryPhoto2Caption",
       category: "individual",
       aspectRatio: "portrait",
-      altText: "Aadhya in Elegant Royal Silk Saree and Gold Ornaments",
+      altText: "Kavana in Elegant Royal Silk Saree and Gold Ornaments",
     },
     {
       id: "photo-3",
@@ -54,7 +54,7 @@ export const GALLERY_CONFIG: {
       captionKey: "galleryPhoto4Caption",
       category: "individual",
       aspectRatio: "portrait",
-      altText: "Arjun in Traditional Ivory and Gold Kurta",
+      altText: "Sweekar in Traditional Ivory and Gold Kurta",
     },
     {
       id: "photo-5",

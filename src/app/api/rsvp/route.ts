@@ -16,7 +16,7 @@ const memoryRsvps: RsvpEntry[] = [
     name: "Dr. Ananth & Mrs. Shobha",
     attending: "yes",
     guestCount: 2,
-    message: "Hearty congratulations to Aadhya and Arjun! May your journey be blessed with endless happiness.",
+    message: "Hearty congratulations to Kavana and Sweekar! May your journey be blessed with endless happiness.",
     createdAt: new Date().toISOString(),
   },
   {

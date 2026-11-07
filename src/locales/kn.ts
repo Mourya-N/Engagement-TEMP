@@ -4,6 +4,7 @@ export const kn: typeof en = {
   // Navigation
   navCouple: "ದಂಪತಿಗಳು",
   navInvitation: "ಆಮಂತ್ರಣ",
+  navMemories: "ನೆನಪುಗಳು",
   navStory: "ನಮ್ಮ ಕಥೆ",
   navCountdown: "ಕ್ಷಣಗಣನೆ",
   navDetails: "ಸಮಾರಂಭ",
@@ -26,7 +27,7 @@ export const kn: typeof en = {
 
   // Family Invitation Section
   familyHeading: "ಕುಟುಂಬದವರ ಆದರದ ಆಮಂತ್ರಣ",
-  familySubheading: "ಶ್ರೀ ಮಂಜುನಾಥ ಸ್ವಾಮಿ ಹಾಗೂ ಕುಲದೇವರ ಕೃಪಾಶೀರ್ವಾದಗಳೊಂದಿಗೆ",
+  familySubheading: "ಶ್ರೀ ಬೀರಲಿಂಗೇಶ್ವರ ಸ್ವಾಮಿ ಹಾಗೂ ಕುಲದೇವರ ಕೃಪಾಶೀರ್ವಾದಗಳೊಂದಿಗೆ",
   familyFormalInvite: "ನಮ್ಮ ಪ್ರೀತಿಯ ಮಕ್ಕಳ ಶುಭ ನಿಶ್ಚಿತಾರ್ಥ ಮಹೋತ್ಸವಕ್ಕೆ ತಾವುಗಳು ಸಕುಟುಂಬ ಸಮೇತರಾಗಿ ಆಗಮಿಸಿ, ನವಜೋಡಿಗೆ ಅಕ್ಷತೆ ಹಾಕಿ ಆಶೀರ್ವದಿಸಬೇಕಾಗಿ ವಿನಮ್ರವಾಗಿ ಕೋರುತ್ತೇವೆ.",
   and: "ಮತ್ತು",
   daughterOf: "ಅವರ ಸುಪುತ್ರಿ",
@@ -35,14 +36,28 @@ export const kn: typeof en = {
   fatherLabel: "ತಂದೆ",
   motherLabel: "ತಾಯಿ",
   brotherLabel: "ಸಹೋದರ",
+  brideHeartTag: "ಪ್ರೀತಿಯ ವಧು",
+  groomHeartTag: "ಪ್ರೀತಿಯ ವರ",
   familyCordiallyWelcomes: "ತಮ್ಮ ಪಾದಾರ್ಪಣೆಯೇ ನಮ್ಮ ಸಂಭ್ರಮ, ಬಂದು ನವಜೋಡಿಯನ್ನು ಹರಸಿ ಆಶೀರ್ವದಿಸಿರಿ.",
+
+  // Childhood Memories Section
+  memoriesHeading: "ಮುಗ್ಧ ಬಾಲ್ಯದಿಂದ ಸಪ್ತಪದಿಯವರೆಗೆ",
+  memoriesSubheading: "ಬಾಲ್ಯದ ಸವಿನೆನಪುಗಳು, ಮುಗ್ಧ ನಗು ಮತ್ತು ನವ ಪಯಣ",
+  memoriesIntro: "ಇಬ್ಬರ ಹೆಜ್ಜೆಗಳು ಒಂದಾಗುವುದಕ್ಕೂ ಮುನ್ನ, ತಮ್ಮ ಮನೆಗಳಲ್ಲಿ ನಗು ಮತ್ತು ಮುಗ್ಧತೆಯಿಂದ ಬೆಳೆದ ಬಾಲ್ಯದ ಮಧುರ ನೆನಪುಗಳು. ಹೊಸ ಜೀವನದ ಹೊಸ್ತಿಲಿನಲ್ಲಿ ನಿಂತಿರುವ ನವಜೋಡಿಯ ಬಾಲ್ಯದ ಒಂದು ಝಲಕ್.",
+  brideChildhoodTitle: "ಮುದ್ದು ಕವನ",
+  groomChildhoodTitle: "ಮುದ್ದು ಸ್ವೀಕಾರ್",
+  brideChildhoodBadge: "ಕುಟುಂಬದ ಪ್ರೀತಿಯ ಕಣ್ಮಣಿ",
+  groomChildhoodBadge: "ಕುಟುಂಬದ ಮುದ್ದಿನ ಸುಪುತ್ರ",
+  brideChildhoodDesc: "ತನ್ನ ಮುಗ್ಧ ನಗು, ಪ್ರೀತಿ ಮತ್ತು ಸಂಸ್ಕಾರದಿಂದ ಚಿಕ್ಕಂದಿನಿಂದಲೇ ಎಲ್ಲರ ಮನಗೆದ್ದ ಮುದ್ದು ಕವನ.",
+  groomChildhoodDesc: "ಚುರುಕು, ಉತ್ಸಾಹ ಹಾಗೂ ಕುಟುಂಬದ ಹೆಮ್ಮೆಯ ಸುಪುತ್ರನಾಗಿ ಬೆಳೆದು ಬಂದ ಮುದ್ದು ಸ್ವೀಕಾರ್.",
+  memoriesCenterBadge: "ಅಂದು ಮುಗ್ಧ ಬಾಲ್ಯ... ಇಂದು ಶಾಶ್ವತ ಜೀವದ ಜೊತೆಗಾರರು",
 
   // Our Story Section
   storyHeading: "ನಮ್ಮ ಪ್ರೇಮ ಪಯಣ",
   storySubheading: "ಎರಡು ಕುಟುಂಬಗಳ, ಎರಡು ಮನಸುಗಳ ಪವಿತ್ರ ಮಿಲನ",
   storyIntro: "ಸಂಸ್ಕೃತಿ, ಸಂಪ್ರದಾಯ ಹಾಗೂ ಪರಸ್ಪರ ಗೌರವದ ಅಡಿಪಾಯದಲ್ಲಿ ಆರಂಭವಾದ ನಮ್ಮ ಪರಿಚಯ, ಹಿರಿಯರ ಅನುಗ್ರಹದಿಂದ ಇಂದು ಆಜೀವ ಬಾಂಧವ್ಯವಾಗಿ ಮುಂದುವರಿಯುತ್ತಿದೆ.",
   storyMilestone1Title: "ಮಧುರ ಆರಂಭ",
-  storyMilestone1Date: "ವಸಂತ ಋತು ೨೦೨೫",
+  storyMilestone1Date: "ವಸಂತ ಋತು ೨೦೨೦",
   storyMilestone1Desc: "ಮೊದಲ ಭೇಟಿಯಲ್ಲೇ ಕಂಡ ಪರಸ್ಪರ ಗೌರವ ಹಾಗೂ ಜೀವನ ಮೌಲ್ಯಗಳ ಹೊಂದಾಣಿಕೆ ನಮ್ಮ ಸ್ನೇಹಕ್ಕೆ ಶುಭ ಮುನ್ನುಡಿ ಬರೆಯಿತು.",
   storyMilestone2Title: "ಕುಟುಂಬಗಳ ಸಮ್ಮಿಲನ",
   storyMilestone2Date: "ಶರದ್ ಋತು ೨೦೨೫",
@@ -134,7 +149,7 @@ export const kn: typeof en = {
   closingHeading: "ಹೃತ್ಪೂರ್ವಕ ಕೃತಜ್ಞತೆಗಳು",
   closingMessage: "ತಮ್ಮ ಶುಭ ಹಾರೈಕೆಗಳು, ಉಪಸ್ಥಿತಿ ಮತ್ತು ಪ್ರಾರ್ಥನೆಗಳು ನಮ್ಮ ನಿಶ್ಚಿತಾರ್ಥವನ್ನು ಅವಿಸ್ಮರಣೀಯವಾಗಿಸಲಿವೆ. ತಮ್ಮ ಸಕುಟುಂಬ ಸಮೇತ ಆಗಮನವನ್ನು ಸದಾ ಬಯಸುವ...",
   closingCoupleSign: "ಕವನ ಮತ್ತು ಸ್ವೀಕಾರ್",
-  closingFamilySign: "ಗೌಡರ ಕುಟುಂಬ ಹಾಗೂ ಬಂಧು-ಮಿತ್ರರು",
+  closingFamilySign: "ಕುರುಬ ಕುಟುಂಬ ಹಾಗೂ ಬಂಧು-ಮಿತ್ರರು",
   closingBlessing: "|| ಸರ್ವೇ ಜನಾಃ ಸುಖಿನೋ ಭವಂತು || ಶುಭಮಸ್ತು",
   musicPlaying: "ಸಂಗೀತ ಚಾಲನೆಯಲ್ಲಿದೆ",
   musicMuted: "ಸಂಗೀತ ಸ್ಥಗಿತಗೊಂಡಿದೆ",

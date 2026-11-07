@@ -13,11 +13,12 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Royal Engagement: Kavana & Sweekar | ನಿಶ್ಚಿತಾರ್ಥ ಮಹೋತ್ಸವ",
+  metadataBase: new URL("https://kavana-sweekar-engagement.in"),
+  title: "Engagement Celebration: Kavana & Sweekar | ನಿಶ್ಚಿತಾರ್ಥ ಮಹೋತ್ಸವ",
   description:
-    "Cordially inviting you to celebrate the auspicious Royal Engagement Ceremony of Kavana G H & Sweekar L on Sunday, January 24, 2027 at Nandagokula Party Hall, Channarayapatna, Hassan.",
+    "Cordially inviting you to celebrate the auspicious Engagement Ceremony of Kavana G H & Sweekar L on Sunday, January 24, 2027 at Nandagokula Party Hall, Channarayapatna, Hassan.",
   keywords: [
-    "Royal Engagement",
+    "Engagement Celebration",
     "Kavana and Sweekar",
     "Nischitartha Mahotsava",
     "Nandagokula Party Hall Channarayapatna",
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Kavana & Sweekar" }],
   openGraph: {
-    title: "Royal Engagement Invitation: Kavana & Sweekar",
+    title: "Engagement Celebration: Kavana & Sweekar",
     description:
       "Join us to celebrate the auspicious union of Kavana & Sweekar on January 24, 2027 at Nandagokula Party Hall, Channarayapatna, Hassan.",
     url: "https://kavana-sweekar-engagement.in",
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
         url: INVITATION_CONFIG.couple.heroImage,
         width: 1200,
         height: 630,
-        alt: "Royal Engagement of Kavana & Sweekar",
+        alt: "Engagement Celebration of Kavana & Sweekar",
       },
     ],
     locale: "en_IN",
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Royal Engagement Invitation: Kavana & Sweekar",
+    title: "Engagement Celebration: Kavana & Sweekar",
     description: "Auspicious Traditional Engagement Ceremony of Kavana & Sweekar.",
     images: [INVITATION_CONFIG.couple.heroImage],
   },
@@ -60,6 +61,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Anek+Kannada:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Noto+Sans+Kannada:wght@300;400;500;600;700&family=Noto+Serif+Kannada:wght@400;500;600;700;800&family=Tiro+Kannada:ital@0;1&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="antialiased selection:bg-gold/30 selection:text-burgundy min-h-screen flex flex-col bg-ivory text-espresso">
         <LanguageProvider>
           <AudioProvider>

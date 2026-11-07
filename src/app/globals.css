@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Noto+Sans+Kannada:wght@300;400;500;600;700&family=Noto+Serif+Kannada:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anek+Kannada:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Noto+Sans+Kannada:wght@300;400;500;600;700&family=Noto+Serif+Kannada:wght@400;500;600;700;800&family=Tiro+Kannada:ital@0;1&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +7,9 @@
 :root {
   --font-cormorant: 'Cormorant Garamond', Georgia, serif;
   --font-lato: 'Lato', sans-serif;
+  --font-tiro-kannada: 'Tiro Kannada', 'Noto Serif Kannada', serif;
   --font-noto-serif-kannada: 'Noto Serif Kannada', serif;
+  --font-anek-kannada: 'Anek Kannada', 'Noto Sans Kannada', sans-serif;
   --font-noto-sans-kannada: 'Noto Sans Kannada', sans-serif;
 }
 
@@ -58,11 +60,38 @@ body {
   animation: shimmer 3s linear infinite;
 }
 
-/* Kannada Unicode Enhancements */
+/* Kannada Typography Hierarchy & Line Spacing */
 .font-kannadaSerif,
-.font-kannadaSans {
+.font-kannadaDisplay {
+  font-family: var(--font-tiro-kannada), 'Noto Serif Kannada', serif;
   font-feature-settings: "kern" 1, "liga" 1;
   text-rendering: optimizeLegibility;
+  line-height: 1.8;
+}
+
+.font-kannadaSans,
+.font-kannadaModern {
+  font-family: var(--font-anek-kannada), 'Noto Sans Kannada', sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
+  line-height: 1.7;
+}
+
+/* Ensure Kannada headings and titles have ample line height so ottu and matra glyphs never clip */
+h1.font-kannadaSerif,
+h2.font-kannadaSerif,
+h3.font-kannadaSerif,
+h1.font-kannadaDisplay,
+h2.font-kannadaDisplay,
+h3.font-kannadaDisplay {
+  line-height: 1.45;
+  padding-top: 0.15em;
+  padding-bottom: 0.15em;
+}
+
+p.font-kannadaSerif,
+p.font-kannadaSans {
+  line-height: 1.85;
 }
 
 /* Prevent unwanted mobile callout & tap highlight */
@@ -70,3 +99,20 @@ a, button {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Floating Flower Petals Animation */
+@keyframes floatPetal {
+  0% {
+    transform: translateY(-20px) rotate(0deg) translateX(0px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(105vh) rotate(360deg) translateX(40px);
+    opacity: 0;
+  }
+}

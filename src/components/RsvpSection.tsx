@@ -107,7 +107,7 @@ export const RsvpSection: React.FC = () => {
 
     const rawMessage = isKannada
       ? `ನಮಸ್ಕಾರ, ನಾನು ${formData.name || "ಅತಿಥಿ"}.\nಆದ್ಯ ಮತ್ತು ಅರ್ಜುನ್ ಅವರ ನಿಶ್ಚಿತಾರ್ಥಕ್ಕೆ RSVP:\nಸ್ಥಿತಿ: ${formData.attending === "yes" ? "ಸಂತೋಷದಿಂದ ಆಗಮಿಸುತ್ತೇವೆ" : "ಕ್ಷಮಿಸಿ, ಬರಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ"}${guestText}${wishesText}`
-      : `Namaskara, I am ${formData.name || "Guest"}.\nRSVP for Engagement Ceremony of Aadhya & Arjun:\nStatus: ${attendanceText}${guestText}${wishesText}`;
+      : `Namaskara, I am ${formData.name || "Guest"}.\nRSVP for Engagement Ceremony of Kavana & Sweekar:\nStatus: ${attendanceText}${guestText}${wishesText}`;
 
     return `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(rawMessage)}`;
   };

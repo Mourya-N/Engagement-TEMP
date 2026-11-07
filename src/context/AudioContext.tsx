@@ -8,28 +8,56 @@ interface AudioContextType {
   toggleAudio: () => void;
   playAudio: () => void;
   pauseAudio: () => void;
+  songTitle: string;
 }
 
-const AudioContext = createContext<AudioContextType | undefined>(undefined);
+const AudioReactContext = createContext<AudioContextType | undefined>(undefined);
+
+// Extra seconds to skip from start of audio (dialogue/wording at beginning)
+// The original file was trimmed at 6s; we skip 2 more seconds client-side = 8s total cut
+const AUDIO_START_OFFSET_SECONDS = 2.0;
 
 export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Initialize audio element
     if (typeof window !== "undefined") {
-      const audio = new Audio(INVITATION_CONFIG.audio.src);
-      audio.loop = true;
-      audio.volume = 0.4;
-      audioRef.current = audio;
+      try {
+        const audioSrc = INVITATION_CONFIG.audio?.src || "/audio/wedding-melody.mp3";
+        const audio = new Audio(audioSrc);
+        audio.loop = true;
+        audio.volume = 0.45;
 
-      audio.onplay = () => setIsPlaying(true);
-      audio.onpause = () => setIsPlaying(false);
-      audio.onerror = () => {
-        // If remote audio fails to load, gracefully reset
-        setIsPlaying(false);
-      };
+        // Skip extra 2 seconds of wording at start safely once metadata is available
+        const setInitialOffset = () => {
+          try {
+            if (audio.currentTime < AUDIO_START_OFFSET_SECONDS) {
+              audio.currentTime = AUDIO_START_OFFSET_SECONDS;
+            }
+          } catch {}
+        };
+
+        audio.addEventListener("loadedmetadata", setInitialOffset);
+        audio.addEventListener("canplay", setInitialOffset);
+
+        audio.onplay = () => setIsPlaying(true);
+        audio.onpause = () => setIsPlaying(false);
+        audio.onended = () => setIsPlaying(false);
+
+        // When audio loops back to 0, skip to offset again to avoid hearing start
+        audio.addEventListener("timeupdate", () => {
+          try {
+            if (audio.currentTime < AUDIO_START_OFFSET_SECONDS && audio.duration > AUDIO_START_OFFSET_SECONDS) {
+              audio.currentTime = AUDIO_START_OFFSET_SECONDS;
+            }
+          } catch {}
+        });
+
+        audioRef.current = audio;
+      } catch {
+        // Fallback
+      }
     }
 
     return () => {
@@ -44,9 +72,11 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (audioRef.current) {
       audioRef.current
         .play()
-        .then(() => setIsPlaying(true))
+        .then(() => {
+          setIsPlaying(true);
+        })
         .catch(() => {
-          // Autoplay was blocked
+          // Autoplay policy prevented playback until explicit user tap
           setIsPlaying(false);
         });
     }
@@ -54,9 +84,11 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const pauseAudio = () => {
     if (audioRef.current) {
-      audioRef.current.pause();
-      setIsPlaying(false);
+      try {
+        audioRef.current.pause();
+      } catch {}
     }
+    setIsPlaying(false);
   };
 
   const toggleAudio = () => {
@@ -68,17 +100,24 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   return (
-    <AudioContext.Provider value={{ isPlaying, toggleAudio, playAudio, pauseAudio }}>
+    <AudioReactContext.Provider
+      value={{
+        isPlaying,
+        toggleAudio,
+        playAudio,
+        pauseAudio,
+        songTitle: INVITATION_CONFIG.audio.title || "Traditional Wedding Instrumental",
+      }}
+    >
       {children}
-    </AudioContext.Provider>
+    </AudioReactContext.Provider>
   );
 };
 
 export const useAudio = (): AudioContextType => {
-  const context = useContext(AudioContext);
+  const context = useContext(AudioReactContext);
   if (!context) {
     throw new Error("useAudio must be used within an AudioProvider");
   }
   return context;
 };
-

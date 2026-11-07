@@ -58,7 +58,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         isKannada: language === "kn",
       }}
     >
-      <div className={language === "kn" ? "font-kannadaSans" : "font-sans"}>
+      <div className={language === "kn" ? "font-kannadaSans leading-relaxed" : "font-sans"}>
         {children}
       </div>
     </LanguageContext.Provider>

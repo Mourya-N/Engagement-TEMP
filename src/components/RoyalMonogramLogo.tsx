@@ -26,52 +26,67 @@ export const RoyalMonogramLogo: React.FC<RoyalMonogramLogoProps> = ({
         viewBox="0 0 200 200"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full filter drop-shadow-[0_2px_8px_rgba(100,31,44,0.18)]"
+        className="w-full h-full filter drop-shadow-[0_4px_12px_rgba(40,10,15,0.35)]"
       >
         <defs>
-          {/* Metallic Antique Gold Gradient */}
-          <linearGradient id="royalGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#DFBF7A" />
-            <stop offset="25%" stopColor="#B89555" />
-            <stop offset="50%" stopColor="#F5E4B9" />
-            <stop offset="75%" stopColor="#96753A" />
-            <stop offset="100%" stopColor="#D4AF37" />
+          {/* Deep Royal Burnished Antique Dark Gold Gradient */}
+          <linearGradient id="royalDarkGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#8A5E17" />
+            <stop offset="25%" stopColor="#5B3808" />
+            <stop offset="48%" stopColor="#B88628" />
+            <stop offset="72%" stopColor="#4D2E05" />
+            <stop offset="100%" stopColor="#7A5214" />
           </linearGradient>
 
-          {/* Deep Royal Burgundy Gradient */}
-          <radialGradient id="burgundyBackdrop" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#822B3B" />
-            <stop offset="70%" stopColor="#641F2C" />
-            <stop offset="100%" stopColor="#3F121B" />
+          {/* Deep Rich Shadow Tone for Monogram */}
+          <linearGradient id="deepGoldShadow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#361D03" />
+            <stop offset="100%" stopColor="#1A0C01" />
+          </linearGradient>
+
+          {/* Deep Dark Royal Burgundy Wax Gradient */}
+          <radialGradient id="burgundyBackdropDark" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#4E0F1B" />
+            <stop offset="65%" stopColor="#2E070F" />
+            <stop offset="100%" stopColor="#180206" />
           </radialGradient>
 
-          {/* Gold Shimmer Stroke */}
-          <linearGradient id="goldStroke" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#96753A" />
-            <stop offset="50%" stopColor="#F8F1E5" />
-            <stop offset="100%" stopColor="#B89555" />
+          {/* Dark Gold Metallic Rim Stroke */}
+          <linearGradient id="darkGoldStroke" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#5B3808" />
+            <stop offset="50%" stopColor="#C99738" />
+            <stop offset="100%" stopColor="#4D2E05" />
           </linearGradient>
         </defs>
 
         {variant === "seal" && (
           <>
             {/* Wax Seal Outer Ruffled Edge */}
-            <circle cx="100" cy="100" r="95" fill="url(#burgundyBackdrop)" />
+            <circle cx="100" cy="100" r="95" fill="url(#burgundyBackdropDark)" />
             <circle
               cx="100"
               cy="100"
-              r="88"
-              stroke="url(#royalGoldGrad)"
-              strokeWidth="1.5"
+              r="89"
+              stroke="url(#royalDarkGoldGrad)"
+              strokeWidth="2"
               strokeDasharray="4 3"
-              opacity="0.85"
+              opacity="0.9"
+            />
+            {/* Inner subtle wax groove */}
+            <circle
+              cx="100"
+              cy="100"
+              r="85"
+              stroke="#180206"
+              strokeWidth="1.5"
+              opacity="0.75"
             />
           </>
         )}
 
-        {/* Outer Circular Filigree & Botanical Wreath */}
-        <circle cx="100" cy="100" r="82" stroke="url(#royalGoldGrad)" strokeWidth="2.5" />
-        <circle cx="100" cy="100" r="76" stroke="url(#royalGoldGrad)" strokeWidth="1" opacity="0.6" />
+        {/* Outer Circular Filigree & Botanical Royal Wreath */}
+        <circle cx="100" cy="100" r="82" stroke="url(#royalDarkGoldGrad)" strokeWidth="3" />
+        <circle cx="100" cy="100" r="76" stroke="url(#royalDarkGoldGrad)" strokeWidth="1.2" opacity="0.8" />
 
         {/* 8 Ornamental Compass Dots */}
         {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, idx) => {
@@ -84,157 +99,182 @@ export const RoyalMonogramLogo: React.FC<RoyalMonogramLogoProps> = ({
               cx={cx}
               cy={cy}
               r={angle % 90 === 0 ? "3.5" : "2"}
-              fill="url(#royalGoldGrad)"
-              stroke="#FFF"
-              strokeWidth="0.5"
+              fill="url(#royalDarkGoldGrad)"
+              stroke="#2E070F"
+              strokeWidth="0.8"
             />
           );
         })}
 
         {/* Top Royal Crown / Lotus Finial */}
-        <g transform="translate(100, 36) scale(0.85)">
+        <g transform="translate(100, 34) scale(0.9)">
           {/* Lotus Petal Center */}
           <path
-            d="M0 -14 C2 -7 6 -2 9 4 C4 4 1 0 0 -5 C-1 0 -4 4 -9 4 C-6 -2 -2 -7 0 -14 Z"
-            fill="url(#royalGoldGrad)"
+            d="M0 -15 C2 -8 7 -2 10 5 C5 5 1 0 0 -6 C-1 0 -5 5 -10 5 C-7 -2 -2 -8 0 -15 Z"
+            fill="url(#royalDarkGoldGrad)"
           />
           {/* Side Lotus Flourishes */}
           <path
-            d="M0 -3 C4 -2 12 1 14 7 C9 8 5 6 0 2 C-5 6 -9 8 -14 7 C-12 1 -4 -2 0 -3 Z"
-            fill="url(#royalGoldGrad)"
+            d="M0 -3 C4 -2 13 1 15 8 C10 9 5 7 0 2 C-5 7 -10 9 -15 8 C-13 1 -4 -2 0 -3 Z"
+            fill="url(#royalDarkGoldGrad)"
           />
-          <circle cx="0" cy="-16" r="2" fill="url(#royalGoldGrad)" />
+          <circle cx="0" cy="-18" r="2.5" fill="url(#royalDarkGoldGrad)" />
         </g>
 
         {/* Bottom Auspicious Knot / Ribbon Flourish */}
-        <g transform="translate(100, 164) scale(0.8)">
+        <g transform="translate(100, 166) scale(0.85)">
           <path
-            d="M-20 -4 C-8 2 0 -6 0 -6 C0 -6 8 2 20 -4 C12 6 4 6 0 0 C-4 6 -12 6 -20 -4 Z"
-            fill="url(#royalGoldGrad)"
+            d="M-22 -4 C-9 2 0 -7 0 -7 C0 -7 9 2 22 -4 C13 7 4 7 0 0 C-4 7 -13 7 -22 -4 Z"
+            fill="url(#royalDarkGoldGrad)"
           />
-          <circle cx="0" cy="4" r="2.5" fill="url(#royalGoldGrad)" />
+          <circle cx="0" cy="5" r="2.8" fill="url(#royalDarkGoldGrad)" />
         </g>
 
-        {/* Central Monogram Typography: Intertwined K & S or ಕನ್ನಡ ಕ & ಸ್ವ */}
+        {/* Central Monogram Typography: K above and S slightly down */}
         {isKannada ? (
-          <g>
+          <g transform="translate(100, 100)">
+            {/* Background Drop Shadow for 'ಕ' */}
             <text
-              x="100"
-              y="114"
+              x="-12"
+              y="-4"
               textAnchor="middle"
-              fill="url(#royalGoldGrad)"
+              fill="url(#deepGoldShadow)"
+              opacity="0.45"
+              fontFamily="var(--font-noto-serif-kannada), serif"
+              fontSize="40"
+              fontWeight="bold"
+            >
+              ಕ
+            </text>
+            {/* Foreground 'ಕ' (Bride Kavana - Placed Above) */}
+            <text
+              x="-14"
+              y="-6"
+              textAnchor="middle"
+              fill="url(#royalDarkGoldGrad)"
+              stroke="url(#darkGoldStroke)"
+              strokeWidth="0.6"
+              fontFamily="var(--font-noto-serif-kannada), serif"
+              fontSize="40"
+              fontWeight="bold"
+            >
+              ಕ
+            </text>
+
+            {/* Connecting Delicate Ampersand */}
+            <text
+              x="2"
+              y="11"
+              textAnchor="middle"
+              fill="url(#royalDarkGoldGrad)"
+              fontFamily="var(--font-cormorant), Georgia, serif"
+              fontSize="24"
+              fontStyle="italic"
+              opacity="0.85"
+            >
+              &amp;
+            </text>
+
+            {/* Background Drop Shadow for 'ಸ್ವ' */}
+            <text
+              x="16"
+              y="32"
+              textAnchor="middle"
+              fill="url(#deepGoldShadow)"
+              opacity="0.45"
               fontFamily="var(--font-noto-serif-kannada), serif"
               fontSize="38"
               fontWeight="bold"
-              letterSpacing="2"
             >
-              ಕ &amp; ಸ್ವ
+              ಸ್ವ
             </text>
+            {/* Foreground 'ಸ್ವ' (Groom Sweekar - Placed Slightly Down) */}
             <text
-              x="100"
-              y="136"
+              x="14"
+              y="30"
               textAnchor="middle"
-              fill="url(#royalGoldGrad)"
-              fontFamily="var(--font-noto-sans-kannada), sans-serif"
-              fontSize="10"
-              fontWeight="600"
-              letterSpacing="4"
-              opacity="0.9"
+              fill="url(#royalDarkGoldGrad)"
+              stroke="url(#darkGoldStroke)"
+              strokeWidth="0.6"
+              fontFamily="var(--font-noto-serif-kannada), serif"
+              fontSize="38"
+              fontWeight="bold"
             >
-              ನಿಶ್ಚಿತಾರ್ಥ
+              ಸ್ವ
             </text>
           </g>
         ) : (
-          <g>
-            {/* Elegant Interlocking Calligraphy "K & S" */}
-            <g transform="translate(100, 108)">
-              {/* Monogram Background Shadow Effect */}
-              <text
-                x="-26"
-                y="8"
-                textAnchor="middle"
-                fill="#3F121B"
-                opacity="0.3"
-                fontFamily="var(--font-cormorant), Georgia, serif"
-                fontSize="62"
-                fontWeight="700"
-                fontStyle="italic"
-              >
-                K
-              </text>
-              <text
-                x="26"
-                y="8"
-                textAnchor="middle"
-                fill="#3F121B"
-                opacity="0.3"
-                fontFamily="var(--font-cormorant), Georgia, serif"
-                fontSize="62"
-                fontWeight="700"
-                fontStyle="italic"
-              >
-                S
-              </text>
-
-              {/* Foreground Golden Monogram */}
-              <text
-                x="-28"
-                y="6"
-                textAnchor="middle"
-                fill="url(#royalGoldGrad)"
-                stroke="url(#goldStroke)"
-                strokeWidth="0.5"
-                fontFamily="var(--font-cormorant), Georgia, serif"
-                fontSize="62"
-                fontWeight="700"
-                fontStyle="italic"
-              >
-                K
-              </text>
-
-              {/* Decorative Intertwining Ampersand */}
-              <text
-                x="0"
-                y="4"
-                textAnchor="middle"
-                fill="#D4AF37"
-                fontFamily="var(--font-cormorant), Georgia, serif"
-                fontSize="32"
-                fontStyle="italic"
-                opacity="0.9"
-              >
-                &amp;
-              </text>
-
-              <text
-                x="28"
-                y="6"
-                textAnchor="middle"
-                fill="url(#royalGoldGrad)"
-                stroke="url(#goldStroke)"
-                strokeWidth="0.5"
-                fontFamily="var(--font-cormorant), Georgia, serif"
-                fontSize="62"
-                fontWeight="700"
-                fontStyle="italic"
-              >
-                S
-              </text>
-            </g>
-
-            {/* Subtitle Royal Inscription */}
+          <g transform="translate(100, 100)">
+            {/* Upper Letter: K (Bride Kavana) - Shifted Above & Left */}
             <text
-              x="100"
-              y="142"
+              x="-14"
+              y="-12"
               textAnchor="middle"
-              fill="url(#royalGoldGrad)"
-              fontFamily="var(--font-lato), sans-serif"
-              fontSize="8.5"
+              fill="url(#deepGoldShadow)"
+              opacity="0.5"
+              fontFamily="var(--font-cormorant), Georgia, serif"
+              fontSize="58"
               fontWeight="700"
-              letterSpacing="5"
-              opacity="0.95"
+              fontStyle="italic"
             >
-              ENGAGEMENT
+              K
+            </text>
+            <text
+              x="-16"
+              y="-14"
+              textAnchor="middle"
+              fill="url(#royalDarkGoldGrad)"
+              stroke="url(#darkGoldStroke)"
+              strokeWidth="0.75"
+              fontFamily="var(--font-cormorant), Georgia, serif"
+              fontSize="58"
+              fontWeight="700"
+              fontStyle="italic"
+            >
+              K
+            </text>
+
+            {/* Connecting Delicate Royal Ampersand in the Center */}
+            <text
+              x="0"
+              y="9"
+              textAnchor="middle"
+              fill="url(#royalDarkGoldGrad)"
+              fontFamily="var(--font-cormorant), Georgia, serif"
+              fontSize="26"
+              fontStyle="italic"
+              opacity="0.85"
+            >
+              &amp;
+            </text>
+
+            {/* Lower Letter: S (Groom Sweekar) - Shifted Slightly Down & Right */}
+            <text
+              x="16"
+              y="32"
+              textAnchor="middle"
+              fill="url(#deepGoldShadow)"
+              opacity="0.5"
+              fontFamily="var(--font-cormorant), Georgia, serif"
+              fontSize="58"
+              fontWeight="700"
+              fontStyle="italic"
+            >
+              S
+            </text>
+            <text
+              x="14"
+              y="30"
+              textAnchor="middle"
+              fill="url(#royalDarkGoldGrad)"
+              stroke="url(#darkGoldStroke)"
+              strokeWidth="0.75"
+              fontFamily="var(--font-cormorant), Georgia, serif"
+              fontSize="58"
+              fontWeight="700"
+              fontStyle="italic"
+            >
+              S
             </text>
           </g>
         )}

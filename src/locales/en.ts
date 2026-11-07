@@ -2,6 +2,7 @@ export const en = {
   // Navigation
   navCouple: "Couple",
   navInvitation: "Invitation",
+  navMemories: "Memories",
   navStory: "Our Story",
   navCountdown: "Countdown",
   navDetails: "Ceremony",
@@ -24,7 +25,7 @@ export const en = {
 
   // Family Invitation Section
   familyHeading: "Together With Our Families",
-  familySubheading: "With the divine grace of Sri Manjunatha Swamy & our ancestors",
+  familySubheading: "With the divine grace of Sri Beeralingeshwara Swamy & our ancestors",
   familyFormalInvite: "We cordially invite you and your family to grace the auspicious engagement ceremony of our beloved children, and bless the new couple with your esteemed presence and warm wishes.",
   and: "&",
   daughterOf: "Beloved Daughter of",
@@ -33,14 +34,28 @@ export const en = {
   fatherLabel: "Father",
   motherLabel: "Mother",
   brotherLabel: "Brother",
+  brideHeartTag: "Beloved Bride",
+  groomHeartTag: "Cherished Groom",
   familyCordiallyWelcomes: "Your gracious presence and heartfelt blessings are our greatest celebration. Kindly grace the occasion.",
+
+  // Childhood Memories Section
+  memoriesHeading: "From Sweet Childhood to Forever",
+  memoriesSubheading: "Cherished moments, nostalgic smiles & growing up",
+  memoriesIntro: "Before destiny brought them together, two cherished souls filled their homes with innocent joy and sunshine. Glimpses from their golden years as they step into a lifetime of togetherness.",
+  brideChildhoodTitle: "Little Kavana",
+  groomChildhoodTitle: "Little Sweekar",
+  brideChildhoodBadge: "The Sweet Angel of the Family",
+  groomChildhoodBadge: "The Golden Boy of the Family",
+  brideChildhoodDesc: "Bringing smiles, warmth, and gentle grace into the lives of everyone around her from her earliest days.",
+  groomChildhoodDesc: "Curious, thoughtful, and full of spirited enthusiasm, bringing endless pride and cheer to his family.",
+  memoriesCenterBadge: "Then Innocent Smiles... Now Soulmates Forever",
 
   // Our Story Section
   storyHeading: "Our Journey of Love",
   storySubheading: "Two hearts, two souls, united in love and tradition",
   storyIntro: "Bonded by shared values, warmth, and family blessings, Kavana & Sweekar take their sacred step towards an eternal tomorrow.",
   storyMilestone1Title: "A Beautiful Beginning",
-  storyMilestone1Date: "Spring 2025",
+  storyMilestone1Date: "Spring 2020",
   storyMilestone1Desc: "A memorable first conversation filled with laughter, mutual respect, and an effortless sense of companionship.",
   storyMilestone2Title: "When Families Met",
   storyMilestone2Date: "Autumn 2025",
@@ -132,7 +147,7 @@ export const en = {
   closingHeading: "With Sincere Gratitude",
   closingMessage: "Your presence, prayers, and heartfelt blessings will make our engagement ceremony truly memorable. We eagerly await your arrival to celebrate together.",
   closingCoupleSign: "Kavana & Sweekar",
-  closingFamilySign: "Gowda Family & Relatives",
+  closingFamilySign: "KURUBA Family & Relatives",
   closingBlessing: "|| ಶುಭಮಸ್ತು || May Auspiciousness Prevail",
   musicPlaying: "Music Playing",
   musicMuted: "Music Muted",

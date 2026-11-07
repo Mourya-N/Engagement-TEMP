@@ -29,6 +29,7 @@ export const Navbar: React.FC = () => {
   const navItems = [
     { href: "#hero", label: t("navCouple") },
     { href: "#family", label: t("navInvitation") },
+    { href: "#memories", label: t("navMemories") },
     { href: "#story", label: t("navStory") },
     { href: "#countdown", label: t("navCountdown") },
     { href: "#ceremony", label: t("navDetails") },
@@ -65,7 +66,7 @@ export const Navbar: React.FC = () => {
                 isKannada ? "font-kannadaSans" : ""
               }`}
             >
-              {isKannada ? "ನಿಶ್ಚಿತಾರ್ಥ ಮಹೋತ್ಸವ" : "Royal Engagement"}
+              {isKannada ? "ನಿಶ್ಚಿತಾರ್ಥ ಮಹೋತ್ಸವ" : "Engagement Ceremony"}
             </span>
             <span
               className={`text-sm font-serif font-bold text-espresso leading-none ${

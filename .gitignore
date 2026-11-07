@@ -33,3 +33,15 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# compiled binaries
+scripts/composite_portrait
+scripts/crop_individuals
+scripts/despill_sweekar
+scripts/make_perfect_avatars
+scripts/make_plain_elegant_couple
+scripts/make_plain_elegant_portraits
+scripts/make_sweekar_avatar
+scripts/remove_bg
+scripts/trim_audio
+
+

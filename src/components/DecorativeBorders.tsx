@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
 
 export const RoyalCornerFlourish: React.FC<{
   className?: string;
@@ -161,6 +164,258 @@ export const MandapArchFrame: React.FC<{
       </div>
 
       {children}
+    </div>
+  );
+};
+
+export const FloralLeavesContinuousAnimation: React.FC = () => {
+  return (
+    <div className="pointer-events-none absolute inset-0 z-10 overflow-visible" aria-hidden="true">
+      {/* 1. TOP-LEFT ROYAL BOTANICAL VINE (Continuous gentle swaying) */}
+      <motion.div
+        animate={{
+          rotate: [-3, 3, -3],
+          y: [-2, 3, -2],
+        }}
+        transition={{
+          duration: 5.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{ transformOrigin: "top left" }}
+        className="absolute -top-6 -left-8 sm:-top-8 sm:-left-12 w-24 h-24 sm:w-32 sm:h-32 text-gold opacity-90 drop-shadow-md"
+      >
+        <svg viewBox="0 0 120 120" fill="none" className="w-full h-full">
+          {/* Main arching vine stem */}
+          <path
+            d="M10 10 C 35 25, 60 40, 95 70"
+            stroke="#B89555"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+          {/* Emerald & Gold Leaves */}
+          <path
+            d="M30 22 C 20 12, 15 28, 30 22 Z"
+            fill="#263D32"
+            stroke="#B89555"
+            strokeWidth="1"
+          />
+          <path
+            d="M48 32 C 40 18, 58 18, 48 32 Z"
+            fill="#D4AF37"
+            stroke="#96753A"
+            strokeWidth="1"
+          />
+          <path
+            d="M62 45 C 50 55, 45 40, 62 45 Z"
+            fill="#355244"
+            stroke="#B89555"
+            strokeWidth="1"
+          />
+          <path
+            d="M75 52 C 85 40, 90 55, 75 52 Z"
+            fill="#D4AF37"
+            stroke="#96753A"
+            strokeWidth="1"
+          />
+          <path
+            d="M92 68 C 105 60, 100 78, 92 68 Z"
+            fill="#263D32"
+            stroke="#B89555"
+            strokeWidth="1"
+          />
+          {/* Auspicious Jasmine Blossoms */}
+          <circle cx="36" cy="27" r="4.5" fill="#FFFDF8" stroke="#D4AF37" strokeWidth="1.2" />
+          <circle cx="36" cy="27" r="1.5" fill="#D4AF37" />
+          <circle cx="70" cy="48" r="5" fill="#FFFDF8" stroke="#D4AF37" strokeWidth="1.2" />
+          <circle cx="70" cy="48" r="1.8" fill="#D4AF37" />
+        </svg>
+      </motion.div>
+
+      {/* 2. TOP-RIGHT ROYAL BOTANICAL VINE (Continuous gentle swaying) */}
+      <motion.div
+        animate={{
+          rotate: [3, -3, 3],
+          y: [-2, 3, -2],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        style={{ transformOrigin: "top right" }}
+        className="absolute -top-6 -right-8 sm:-top-8 sm:-right-12 w-24 h-24 sm:w-32 sm:h-32 text-gold opacity-90 drop-shadow-md scale-x-[-1]"
+      >
+        <svg viewBox="0 0 120 120" fill="none" className="w-full h-full">
+          <path
+            d="M10 10 C 35 25, 60 40, 95 70"
+            stroke="#B89555"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M30 22 C 20 12, 15 28, 30 22 Z"
+            fill="#263D32"
+            stroke="#B89555"
+            strokeWidth="1"
+          />
+          <path
+            d="M48 32 C 40 18, 58 18, 48 32 Z"
+            fill="#D4AF37"
+            stroke="#96753A"
+            strokeWidth="1"
+          />
+          <path
+            d="M62 45 C 50 55, 45 40, 62 45 Z"
+            fill="#355244"
+            stroke="#B89555"
+            strokeWidth="1"
+          />
+          <path
+            d="M75 52 C 85 40, 90 55, 75 52 Z"
+            fill="#D4AF37"
+            stroke="#96753A"
+            strokeWidth="1"
+          />
+          <path
+            d="M92 68 C 105 60, 100 78, 92 68 Z"
+            fill="#263D32"
+            stroke="#B89555"
+            strokeWidth="1"
+          />
+          <circle cx="36" cy="27" r="4.5" fill="#FFFDF8" stroke="#D4AF37" strokeWidth="1.2" />
+          <circle cx="36" cy="27" r="1.5" fill="#D4AF37" />
+          <circle cx="70" cy="48" r="5" fill="#FFFDF8" stroke="#D4AF37" strokeWidth="1.2" />
+          <circle cx="70" cy="48" r="1.8" fill="#D4AF37" />
+        </svg>
+      </motion.div>
+
+      {/* 3. CONTINUOUS FLOATING LEAF 1 (Left Upper - Emerald Leaf) */}
+      <motion.div
+        animate={{
+          y: [-12, 12, -12],
+          x: [-6, 6, -6],
+          rotate: [-18, 15, -18],
+        }}
+        transition={{
+          duration: 4.8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute top-1/4 -left-5 sm:-left-8 w-7 h-7 sm:w-9 sm:h-9 opacity-85"
+      >
+        <svg viewBox="0 0 40 40" className="w-full h-full drop-shadow-sm">
+          <path
+            d="M8 32 C 12 18, 25 8, 36 6 C 30 20, 20 28, 8 32 Z"
+            fill="#263D32"
+            stroke="#B89555"
+            strokeWidth="1"
+          />
+          <path d="M12 28 Q 22 20 34 8" stroke="#B89555" strokeWidth="0.8" />
+        </svg>
+      </motion.div>
+
+      {/* 4. CONTINUOUS FLOATING FLOWER 1 (Left Middle - Royal Jasmine Bloom) */}
+      <motion.div
+        animate={{
+          y: [10, -14, 10],
+          x: [4, -8, 4],
+          rotate: [0, 360],
+        }}
+        transition={{
+          y: { duration: 5.2, repeat: Infinity, ease: "easeInOut" },
+          x: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+          rotate: { duration: 24, repeat: Infinity, ease: "linear" },
+        }}
+        className="absolute top-1/2 -left-6 sm:-left-9 w-6 h-6 sm:w-8 sm:h-8 opacity-90 drop-shadow-md"
+      >
+        <svg viewBox="0 0 32 32" className="w-full h-full">
+          {/* 5 Petal Jasmine */}
+          <circle cx="16" cy="16" r="3" fill="#D4AF37" />
+          <circle cx="16" cy="8" r="5" fill="#FFFDF8" stroke="#D4AF37" strokeWidth="0.8" />
+          <circle cx="23.6" cy="13.5" r="5" fill="#FFFDF8" stroke="#D4AF37" strokeWidth="0.8" />
+          <circle cx="20.7" cy="22.5" r="5" fill="#FFFDF8" stroke="#D4AF37" strokeWidth="0.8" />
+          <circle cx="11.3" cy="22.5" r="5" fill="#FFFDF8" stroke="#D4AF37" strokeWidth="0.8" />
+          <circle cx="8.4" cy="13.5" r="5" fill="#FFFDF8" stroke="#D4AF37" strokeWidth="0.8" />
+          <circle cx="16" cy="16" r="2.2" fill="#D4AF37" />
+        </svg>
+      </motion.div>
+
+      {/* 5. CONTINUOUS FLOATING LEAF 2 (Right Upper - Golden Leaf) */}
+      <motion.div
+        animate={{
+          y: [14, -10, 14],
+          x: [8, -6, 8],
+          rotate: [15, -20, 15],
+        }}
+        transition={{
+          duration: 5.4,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute top-1/3 -right-6 sm:-right-9 w-8 h-8 sm:w-10 sm:h-10 opacity-85"
+      >
+        <svg viewBox="0 0 40 40" className="w-full h-full drop-shadow-sm">
+          <path
+            d="M32 32 C 28 18, 15 8, 4 6 C 10 20, 20 28, 32 32 Z"
+            fill="#D4AF37"
+            stroke="#96753A"
+            strokeWidth="1"
+          />
+          <path d="M28 28 Q 18 20 6 8" stroke="#96753A" strokeWidth="0.8" />
+        </svg>
+      </motion.div>
+
+      {/* 6. CONTINUOUS FLOATING FLOWER 2 (Right Lower - Rose Petal) */}
+      <motion.div
+        animate={{
+          y: [-12, 12, -12],
+          x: [-5, 8, -5],
+          rotate: [-15, 25, -15],
+        }}
+        transition={{
+          duration: 5.8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute bottom-1/4 -right-5 sm:-right-8 w-6 h-6 sm:w-7 sm:h-7 opacity-90 drop-shadow-md"
+      >
+        <svg viewBox="0 0 32 32" className="w-full h-full">
+          <path
+            d="M16 4 C 8 8, 4 18, 12 26 C 20 34, 28 24, 24 14 C 20 4, 16 4, 16 4 Z"
+            fill="#D9BDB0"
+            stroke="#B89555"
+            strokeWidth="0.8"
+          />
+          <path
+            d="M16 8 C 11 11, 8 18, 14 23 C 19 28, 24 21, 21 14 Z"
+            fill="#E8D5CC"
+          />
+        </svg>
+      </motion.div>
+
+      {/* 7. CONTINUOUS FLOATING LEAF 3 (Bottom-Left - Delicate Foliage) */}
+      <motion.div
+        animate={{
+          y: [8, -8, 8],
+          rotate: [-10, 10, -10],
+        }}
+        transition={{
+          duration: 4.2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="absolute bottom-12 -left-4 sm:-left-6 w-6 h-6 opacity-75"
+      >
+        <svg viewBox="0 0 30 30" className="w-full h-full">
+          <path
+            d="M5 25 C 10 12, 20 6, 26 5 C 22 15, 14 22, 5 25 Z"
+            fill="#355244"
+            stroke="#B89555"
+            strokeWidth="0.8"
+          />
+        </svg>
+      </motion.div>
     </div>
   );
 };

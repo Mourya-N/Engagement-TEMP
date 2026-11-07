@@ -41,12 +41,26 @@ const config: Config = {
           light: "#4E3C34",
           dark: "#261C18",
         },
+        olive: {
+          DEFAULT: "#556B2F",
+          light: "#6E8541",
+          dark: "#3B4D1F",
+          muted: "#7B8E57",
+        },
+        matcha: {
+          DEFAULT: "#8A9A5B",
+          light: "#A4B577",
+          dark: "#687742",
+          soft: "#C2CE9F",
+        },
       },
       fontFamily: {
         serif: ["var(--font-cormorant)", "Georgia", "serif"],
         sans: ["var(--font-lato)", "sans-serif"],
-        kannadaSerif: ["var(--font-noto-serif-kannada)", "serif"],
-        kannadaSans: ["var(--font-noto-sans-kannada)", "sans-serif"],
+        kannadaSerif: ["var(--font-tiro-kannada)", "var(--font-noto-serif-kannada)", "serif"],
+        kannadaSans: ["var(--font-anek-kannada)", "var(--font-noto-sans-kannada)", "sans-serif"],
+        kannadaDisplay: ["var(--font-tiro-kannada)", "var(--font-noto-serif-kannada)", "serif"],
+        kannadaModern: ["var(--font-anek-kannada)", "var(--font-noto-sans-kannada)", "sans-serif"],
       },
       boxShadow: {
         'royal': '0 10px 30px -10px rgba(100, 31, 44, 0.15), 0 4px 6px -2px rgba(184, 149, 85, 0.1)',

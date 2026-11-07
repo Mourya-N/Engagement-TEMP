@@ -6,6 +6,12 @@ import { useLanguage } from "@/context/LanguageContext";
 import { INVITATION_CONFIG } from "@/config/invitation";
 import { MandapArchFrame, RoyalDivider } from "./DecorativeBorders";
 import {
+  RealisticRose,
+  RealisticOrchid,
+  RealisticDaffodil,
+  AnimatedLetterText,
+} from "./RoyalFlorals";
+import {
   Calendar,
   Clock,
   MapPin,
@@ -23,10 +29,14 @@ export const CeremonyDetails: React.FC = () => {
   const { t, isKannada } = useLanguage();
   const { event, couple } = INVITATION_CONFIG;
 
-  const googleMapsUrl = "https://maps.app.goo.gl/HYsMCpFWu63V42vh9?g_st=ac";
+  const googleMapsUrl =
+    event.googleMapsSearchUrl || "https://www.google.com/maps/search/?api=1&query=Nandagokula+Party+Hall+Channarayapatna";
+  const googleDirectionsUrl =
+    event.googleMapsDirectionsUrl || "https://www.google.com/maps/dir/?api=1&destination=12.898681,76.391895";
   const appleMapsUrl = "https://maps.apple.com/?q=Nandagokula+Party+Hall&ll=12.898681,76.391895";
   const mapsEmbedUrl =
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.1405734944983!2d76.39189537507507!3d12.898681087409749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba55ff76b663a8b%3A0x1b52718bfba7c3cb!2sNandagokula%20Party%20Hall!5e0!3m2!1sen!2sin!4v1794068211755!5m2!1sen!2sin";
+    event.embedMapUrl ||
+    "https://maps.google.com/maps?q=Nandagokula%20Party%20Hall%2C%20Channarayapatna%2C%20Karnataka&t=&z=15&ie=UTF8&iwloc=&output=embed";
 
   // Icon mapping
   const getIcon = (name: string) => {
@@ -63,7 +73,7 @@ export const CeremonyDetails: React.FC = () => {
     const icsContent = [
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
-      "PRODID:-//Royal Engagement//Kavana and Sweekar//EN",
+      "PRODID:-//Engagement Celebration//Kavana and Sweekar//EN",
       "CALSCALE:GREGORIAN",
       "METHOD:PUBLISH",
       "BEGIN:VEVENT",
@@ -90,20 +100,15 @@ export const CeremonyDetails: React.FC = () => {
     window.URL.revokeObjectURL(url);
   };
 
-  // Smart map opener: checks device or defaults to Google Maps
+  // Direct Google Maps opener - guaranteed to work across all devices
   const handleAddressClick = () => {
     if (typeof window !== "undefined") {
-      const isApple = /(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgent);
-      if (isApple) {
-        window.open(appleMapsUrl, "_blank");
-      } else {
-        window.open(googleMapsUrl, "_blank");
-      }
+      window.open(googleMapsUrl, "_blank");
     }
   };
 
   return (
-    <section id="ceremony" className="py-20 sm:py-28 px-4 bg-ivory-light relative overflow-hidden">
+    <section id="ceremony" className="py-20 sm:py-28 px-4 bg-gradient-to-b from-ivory-light via-matcha-soft/10 to-ivory-light relative overflow-hidden">
       <div className="max-w-4xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
@@ -126,7 +131,7 @@ export const CeremonyDetails: React.FC = () => {
               isKannada ? "font-kannadaSerif" : ""
             }`}
           >
-            {t("ceremonyHeading")}
+            <AnimatedLetterText text={t("ceremonyHeading")} />
           </motion.h2>
           <RoyalDivider variant="lotus" />
         </div>
@@ -143,7 +148,7 @@ export const CeremonyDetails: React.FC = () => {
             {/* Event Name */}
             <h3
               className={`text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-espresso mb-4 ${
-                isKannada ? "font-kannadaSerif" : ""
+                isKannada ? "font-kannadaDisplay leading-normal py-1" : ""
               }`}
             >
               {isKannada ? event.titleKn : event.title}
@@ -152,34 +157,34 @@ export const CeremonyDetails: React.FC = () => {
             {/* Key Information Badges */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-2xl my-4 text-center">
               {/* Date & Day */}
-              <div className="p-4 rounded-2xl bg-ivory/90 border border-gold/40 flex flex-col items-center shadow-xs">
-                <Calendar className="w-5 h-5 text-gold-dark mb-2" />
-                <span className="text-xs uppercase tracking-wider text-espresso/70 font-semibold">
+              <div className="p-4 rounded-2xl bg-ivory/90 border border-olive/40 hover:border-olive hover:bg-matcha-soft/15 flex flex-col items-center shadow-xs transition-all">
+                <Calendar className="w-5 h-5 text-olive mb-2" />
+                <span className={`text-xs uppercase tracking-wider text-espresso/70 font-semibold ${isKannada ? "font-kannadaModern normal-case" : ""}`}>
                   {isKannada ? event.dayKn : event.day}
                 </span>
-                <span className="text-sm sm:text-base font-serif font-bold text-burgundy mt-1">
+                <span className={`text-sm sm:text-base font-serif font-bold text-burgundy mt-1 ${isKannada ? "font-kannadaModern font-bold" : ""}`}>
                   {isKannada ? event.dateFormattedKn : event.dateFormatted}
                 </span>
               </div>
 
               {/* Time */}
-              <div className="p-4 rounded-2xl bg-ivory/90 border border-gold/40 flex flex-col items-center shadow-xs">
-                <Clock className="w-5 h-5 text-gold-dark mb-2" />
-                <span className="text-xs uppercase tracking-wider text-espresso/70 font-semibold">
+              <div className="p-4 rounded-2xl bg-matcha-soft/20 border border-matcha/40 hover:border-matcha hover:bg-matcha-soft/30 flex flex-col items-center shadow-xs transition-all">
+                <Clock className="w-5 h-5 text-olive-dark mb-2" />
+                <span className={`text-xs uppercase tracking-wider text-espresso/70 font-semibold ${isKannada ? "font-kannadaModern normal-case" : ""}`}>
                   {isKannada ? "ಸಮಯ" : "Time"}
                 </span>
-                <span className="text-sm sm:text-base font-serif font-bold text-burgundy mt-1">
+                <span className={`text-sm sm:text-base font-serif font-bold text-burgundy mt-1 ${isKannada ? "font-kannadaModern font-bold" : ""}`}>
                   {isKannada ? event.timeKn : event.time}
                 </span>
               </div>
 
               {/* Dress Code */}
-              <div className="p-4 rounded-2xl bg-ivory/90 border border-gold/40 flex flex-col items-center shadow-xs">
-                <Shirt className="w-5 h-5 text-gold-dark mb-2" />
-                <span className="text-xs uppercase tracking-wider text-espresso/70 font-semibold">
+              <div className="p-4 rounded-2xl bg-ivory/90 border border-olive/40 hover:border-olive hover:bg-matcha-soft/15 flex flex-col items-center shadow-xs transition-all">
+                <Shirt className="w-5 h-5 text-olive mb-2" />
+                <span className={`text-xs uppercase tracking-wider text-espresso/70 font-semibold ${isKannada ? "font-kannadaModern normal-case" : ""}`}>
                   {t("dressCodeLabel")}
                 </span>
-                <span className="text-xs sm:text-sm font-semibold text-espresso mt-1">
+                <span className={`text-xs sm:text-sm font-semibold text-espresso mt-1 ${isKannada ? "font-kannadaModern leading-relaxed text-xs" : ""}`}>
                   {isKannada ? event.dressCodeKn : event.dressCode}
                 </span>
               </div>
@@ -197,7 +202,7 @@ export const CeremonyDetails: React.FC = () => {
                 <MapPin className="w-5 h-5 text-gold-dark group-hover:scale-110 transition-transform" />
                 <h4
                   className={`text-lg sm:text-xl font-serif font-bold ${
-                    isKannada ? "font-kannadaSerif" : ""
+                    isKannada ? "font-kannadaDisplay leading-normal" : ""
                   }`}
                 >
                   {isKannada ? event.venueNameKn : event.venueName}
@@ -206,7 +211,7 @@ export const CeremonyDetails: React.FC = () => {
 
               <p
                 className={`text-xs sm:text-sm text-espresso/90 leading-relaxed font-medium group-hover:text-espresso transition-colors ${
-                  isKannada ? "font-kannadaSans" : ""
+                  isKannada ? "font-kannadaModern leading-loose" : ""
                 }`}
               >
                 {isKannada ? event.addressKn : event.address}
@@ -214,34 +219,46 @@ export const CeremonyDetails: React.FC = () => {
 
               <div className="mt-3 inline-flex items-center gap-1.5 text-xs text-gold-dark font-semibold group-hover:text-burgundy transition-colors">
                 <Navigation className="w-3.5 h-3.5" />
-                <span>{isKannada ? "ಮ್ಯಾಪ್ಸ್‌ನಲ್ಲಿ ತೆರೆಯಿರಿ (ಗೂಗಲ್ / ಆ್ಯಪಲ್ ಮ್ಯಾಪ್ಸ್)" : "Open in Google Maps / Apple Maps"}</span>
+                <span>{isKannada ? "ಗೂಗಲ್ ಮ್ಯಾಪ್ಸ್‌ನಲ್ಲಿ ಸ್ಥಳ ವೀಕ್ಷಿಸಿ" : "Open in Google Maps"}</span>
                 <ExternalLink className="w-3 h-3 opacity-70" />
               </div>
             </div>
 
             {/* Embedded Responsive Google Map */}
             <div className="w-full max-w-2xl my-4 rounded-2xl overflow-hidden border-2 border-gold/60 shadow-royal bg-ivory">
-              <div className="bg-ivory-light px-4 py-2 border-b border-gold/40 flex items-center justify-between text-xs font-semibold text-espresso">
+              <div className="bg-ivory-light px-4 py-2.5 border-b border-gold/40 flex items-center justify-between text-xs font-semibold text-espresso">
                 <div className="flex items-center gap-1.5 text-gold-dark">
                   <MapPin className="w-3.5 h-3.5" />
-                  <span>{isKannada ? "ಸ್ಥಳದ ನಕ್ಷೆ" : "Interactive Location Map"}</span>
+                  <span>{isKannada ? "ಸ್ಥಳದ ನಕ್ಷೆ (Google Maps)" : "Interactive Google Map"}</span>
                 </div>
                 <span className="text-[11px] text-espresso/60 font-normal">
                   Channarayapatna, Hassan
                 </span>
               </div>
-              <div className="relative aspect-[16/9] w-full">
+              <div className="relative aspect-[16/9] w-full bg-ivory-dark">
                 <iframe
                   src={mapsEmbedUrl}
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
-                  allowFullScreen={false}
+                  allowFullScreen={true}
                   loading="lazy"
-                  referrerPolicy="strict-origin-when-cross-origin"
+                  referrerPolicy="no-referrer-when-downgrade"
                   title="Nandagokula Party Hall Venue Location Map"
                   className="w-full h-full"
                 />
+              </div>
+              <div className="bg-ivory px-4 py-2 border-t border-gold/30 flex items-center justify-between text-[11px] text-espresso/80">
+                <span>Nandagokula Party Hall, Channarayapatna</span>
+                <a
+                  href={googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gold-dark hover:text-burgundy font-semibold flex items-center gap-1"
+                >
+                  <span>{isKannada ? "ದೊಡ್ಡ ಮ್ಯಾಪ್‌ನಲ್ಲಿ ತೆರೆಯಿರಿ" : "View Larger Map"}</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </div>
             </div>
 
@@ -254,7 +271,7 @@ export const CeremonyDetails: React.FC = () => {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-burgundy hover:bg-burgundy-light text-ivory text-xs sm:text-sm font-bold tracking-wide shadow-md hover:shadow-lg transition-all cursor-pointer"
               >
                 <MapPin className="w-4 h-4 text-gold-light" />
-                <span>Google Maps</span>
+                <span>{isKannada ? "ಗೂಗಲ್ ಮ್ಯಾಪ್ಸ್" : "Google Maps"}</span>
                 <ExternalLink className="w-3.5 h-3.5 opacity-80" />
               </a>
 
@@ -306,7 +323,7 @@ export const CeremonyDetails: React.FC = () => {
                     key={idx}
                     className="p-4 rounded-xl bg-ivory/70 border border-gold/30 flex items-start gap-3.5"
                   >
-                    <div className="p-2 rounded-lg bg-gold/15 border border-gold/30 mt-0.5">
+                    <div className={`p-2 rounded-lg border mt-0.5 ${idx % 2 === 0 ? "bg-matcha/20 border-matcha/50 text-olive-dark" : "bg-gold/15 border-gold/40"}`}>
                       {getIcon(item.iconName)}
                     </div>
                     <div>
