@@ -12,6 +12,38 @@ interface EnvelopeOpeningProps {
   onOpenComplete?: () => void;
 }
 
+// Auspicious temple chime sound synthesized with Web Audio API (instant, zero network latency)
+const playAuspiciousChime = () => {
+  if (typeof window === "undefined") return;
+  try {
+    const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    if (!AudioContextClass) return;
+    const ctx = new AudioContextClass();
+    
+    // Notes forming an auspicious pentatonic temple chord: C5, G5, C6
+    const freqs = [523.25, 783.99, 1046.5];
+    freqs.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+      
+      gain.gain.setValueAtTime(0, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.12 / (idx + 1), ctx.currentTime + 0.05 + idx * 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.8 + idx * 0.3);
+      
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      
+      osc.start(ctx.currentTime + idx * 0.08);
+      osc.stop(ctx.currentTime + 2.5);
+    });
+  } catch {
+    // Graceful fallback if Web Audio is restricted
+  }
+};
+
 export const EnvelopeOpening: React.FC<EnvelopeOpeningProps> = ({ onOpenComplete }) => {
   const { t, isKannada } = useLanguage();
   const { playAudio } = useAudio();
@@ -23,15 +55,18 @@ export const EnvelopeOpening: React.FC<EnvelopeOpeningProps> = ({ onOpenComplete
     if (isOpening || isOpen) return;
     setIsOpening(true);
 
-    // Start ambient background music
+    // Play auspicious chime
+    playAuspiciousChime();
+
+    // Fade in ambient instrumental music
     playAudio();
 
-    // Trigger flap opening
+    // Trigger 3D flap unsealing
     setTimeout(() => {
       setIsOpen(true);
     }, 450);
 
-    // Dismiss overlay and reveal the main invitation page
+    // Dismiss overlay and reveal invitation
     setTimeout(() => {
       setIsDismissed(true);
       if (onOpenComplete) onOpenComplete();
@@ -50,14 +85,21 @@ export const EnvelopeOpening: React.FC<EnvelopeOpeningProps> = ({ onOpenComplete
       <motion.div
         initial={{ opacity: 1 }}
         exit={{ opacity: 0, transition: { duration: 0.85, ease: "easeInOut" } }}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-[#F7F2E7] overflow-hidden px-4"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-[#F7F2E7] overflow-hidden px-4 select-none"
         style={{
           backgroundImage: `radial-gradient(circle at 50% 50%, rgba(248, 241, 229, 0.98), rgba(230, 217, 196, 0.98)), url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23B89555' fill-opacity='0.06' fill-rule='evenodd'%3E%3Cpath d='M40 0L80 40L40 80L0 40Z'/%3E%3C/g%3E%3C/svg%3E")`,
         }}
         role="region"
         aria-label="Invitation Envelope"
       >
-        {/* Subtle Ambient Golden Shimmering Rings */}
+        {/* Floating golden sparkle particles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/4 left-1/6 w-2 h-2 rounded-full bg-gold/40 animate-ping" style={{ animationDuration: '4s' }} />
+          <div className="absolute top-1/3 right-1/5 w-1.5 h-1.5 rounded-full bg-gold/50 animate-ping" style={{ animationDuration: '3.5s', animationDelay: '1s' }} />
+          <div className="absolute bottom-1/4 left-1/4 w-2.5 h-2.5 rounded-full bg-gold/30 animate-ping" style={{ animationDuration: '5s', animationDelay: '2s' }} />
+        </div>
+
+        {/* Ambient Golden Shimmering Rings */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
           <div className="w-[320px] sm:w-[500px] md:w-[680px] aspect-square rounded-full border border-gold/20 animate-pulse-subtle" />
           <div className="absolute w-[240px] sm:w-[380px] md:w-[520px] aspect-square rounded-full border border-gold/15" />
