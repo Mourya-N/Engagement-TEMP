@@ -1,18 +1,52 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { INVITATION_CONFIG } from "@/config/invitation";
 import { RoyalDivider, RoyalCornerFlourish } from "./DecorativeBorders";
-import { Heart } from "lucide-react";
+import { Heart, Share2, Check, MessageCircle } from "lucide-react";
 
 export const ClosingSection: React.FC = () => {
   const { t, isKannada } = useLanguage();
-  const { couple } = INVITATION_CONFIG;
+  const { couple, event } = INVITATION_CONFIG;
+  const [copied, setCopied] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleShare = async () => {
+    const shareData = {
+      title: `${couple.bride.firstName} & ${couple.groom.firstName} - Engagement Invitation`,
+      text: isKannada
+        ? `ನಮಸ್ಕಾರ! ಕವನ ಮತ್ತು ಸ್ವೀಕಾರ್ ಅವರ ಶುಭ ನಿಶ್ಚಿತಾರ್ಥ ಮಹೋತ್ಸವದ ಆಮಂತ್ರಣ ಪತ್ರಿಕೆ ಇಲ್ಲಿದೆ. ದಿನಾಂಕ: ೨೪ ಜನವರಿ ೨೦೨೭, ನಂದಗೋಕುಲ ಪಾರ್ಟಿ ಹಾಲ್, ಚನ್ನರಾಯಪಟ್ಟಣ.`
+        : `Namaskara! You are cordially invited to the Engagement Ceremony of Kavana & Sweekar on Sunday, January 24, 2027 at Nandagokula Party Hall, Channarayapatna, Hassan.`,
+      url: typeof window !== "undefined" ? window.location.href : "https://kavana-sweekar-engagement.in",
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch {
+        // Share cancelled or failed
+      }
+    } else {
+      // Fallback: copy link
+      if (typeof window !== "undefined") {
+        navigator.clipboard.writeText(window.location.href);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      }
+    }
+  };
+
+  const getWhatsAppShareUrl = () => {
+    const message = isKannada
+      ? `ನಮಸ್ಕಾರ! ಕವನ ಮತ್ತು ಸ್ವೀಕಾರ್ ಅವರ ಶುಭ ನಿಶ್ಚಿತಾರ್ಥ ಮಹೋತ್ಸವಕ್ಕೆ ಸಕುಟುಂಬ ಸಮೇತರಾಗಿ ಆಗಮಿಸಿ ನವಜೋಡಿಯನ್ನು ಹರಸಬೇಕಾಗಿ ವಿನಂತಿ.\n\nದಿನಾಂಕ: ಭಾನುವಾರ, ೨೪ ಜನವರಿ ೨೦೨೭\nಸ್ಥಳ: ನಂದಗೋಕುಲ ಪಾರ್ಟಿ ಹಾಲ್, ಚನ್ನರಾಯಪಟ್ಟಣ, ಹಾಸನ.\nಆಮಂತ್ರಣ ಪತ್ರಿಕೆ ವೀಕ್ಷಿಸಿ: ${typeof window !== "undefined" ? window.location.href : ""}`
+      : `Namaskara! Cordially inviting you and your family to the auspicious Engagement Ceremony of Kavana & Sweekar.\n\nDate: Sunday, January 24, 2027\nVenue: Nandagokula Party Hall, Channarayapatna, Hassan.\nView Invitation: ${typeof window !== "undefined" ? window.location.href : ""}`;
+
+    return `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
   };
 
   return (
@@ -51,7 +85,7 @@ export const ClosingSection: React.FC = () => {
           {t("closingHeading")}
         </motion.h2>
 
-        <RoyalDivider variant="lotus" className="text-gold" />
+        <RoyalDivider variant="kalash" className="text-gold" />
 
         {/* Gratitude Paragraph */}
         <motion.p
@@ -72,7 +106,7 @@ export const ClosingSection: React.FC = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="my-6 inline-flex flex-col items-center"
+          className="my-4 inline-flex flex-col items-center"
         >
           <div className="w-16 h-16 rounded-full border-2 border-gold flex items-center justify-center bg-espresso-light mb-3 shadow-royal-gold">
             <span
@@ -103,8 +137,38 @@ export const ClosingSection: React.FC = () => {
           </p>
         </motion.div>
 
+        {/* Share Invitation Buttons */}
+        <div className="my-6 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href={getWhatsAppShareUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald hover:bg-emerald-light text-ivory text-xs sm:text-sm font-semibold tracking-wide shadow-md transition-all cursor-pointer"
+          >
+            <MessageCircle className="w-4 h-4" />
+            <span>{isKannada ? "ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಿ" : "Share via WhatsApp"}</span>
+          </a>
+
+          <button
+            onClick={handleShare}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-ivory/15 hover:bg-ivory/25 text-ivory border border-gold/50 text-xs sm:text-sm font-semibold tracking-wide shadow-xs transition-all cursor-pointer"
+          >
+            {copied ? (
+              <>
+                <Check className="w-4 h-4 text-gold-light" />
+                <span>{isKannada ? "ಲಿಂಕ್ ನಕಲಿಸಲಾಗಿದೆ!" : "Link Copied!"}</span>
+              </>
+            ) : (
+              <>
+                <Share2 className="w-4 h-4 text-gold-light" />
+                <span>{isKannada ? "ಆಮಂತ್ರಣ ಹಂಚಿಕೊಳ್ಳಿ" : "Share Invitation"}</span>
+              </>
+            )}
+          </button>
+        </div>
+
         {/* Back to top link */}
-        <div className="mt-12 pt-6 border-t border-gold/20 flex flex-col items-center gap-2">
+        <div className="mt-10 pt-6 border-t border-gold/20 flex flex-col items-center gap-2">
           <button
             onClick={scrollToTop}
             className="text-xs uppercase tracking-widest text-gold hover:text-gold-light transition-colors cursor-pointer py-1"

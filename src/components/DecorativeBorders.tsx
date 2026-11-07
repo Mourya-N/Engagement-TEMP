@@ -63,7 +63,7 @@ export const RoyalCornerFlourish: React.FC<{
 
 export const RoyalDivider: React.FC<{
   className?: string;
-  variant?: "lotus" | "simple" | "diya";
+  variant?: "lotus" | "simple" | "diya" | "kalash";
 }> = ({ className = "", variant = "lotus" }) => {
   return (
     <div className={`flex items-center justify-center my-6 sm:my-8 select-none ${className}`}>
@@ -76,7 +76,6 @@ export const RoyalDivider: React.FC<{
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* Traditional Indian stylized lotus */}
             <path
               d="M20 6 C21 13 26 19 28 26 C23 26 21 21 20 18 C19 21 17 26 12 26 C14 19 19 13 20 6Z"
               fill="#B89555"
@@ -92,6 +91,20 @@ export const RoyalDivider: React.FC<{
               fill="#B89555"
             />
             <circle cx="20" cy="24" r="1.5" fill="#F8F1E5" />
+          </svg>
+        )}
+        {variant === "kalash" && (
+          <svg
+            className="w-7 h-7 sm:w-8 sm:h-8"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {/* Traditional Indian Sacred Kalash */}
+            <circle cx="16" cy="7" r="3" fill="#B89555" />
+            <path d="M16 10 L13 14 L19 14 Z" fill="#263D32" />
+            <path d="M11 14 C10 18 8 20 10 24 C12 27 20 27 22 24 C24 20 22 18 21 14 Z" fill="#B89555" />
+            <rect x="12" y="26" width="8" height="2" rx="1" fill="#641F2C" />
           </svg>
         )}
         {variant === "diya" && (
@@ -130,7 +143,7 @@ export const MandapArchFrame: React.FC<{
 }> = ({ children, className = "" }) => {
   return (
     <div
-      className={`relative p-6 sm:p-10 md:p-14 bg-ivory/80 backdrop-blur-sm rounded-t-[50px] sm:rounded-t-[80px] rounded-b-2xl border-2 border-gold/40 shadow-royal transition-all duration-300 ${className}`}
+      className={`relative p-6 sm:p-10 md:p-14 bg-ivory/85 backdrop-blur-sm rounded-t-[50px] sm:rounded-t-[80px] rounded-b-2xl border-2 border-gold/40 shadow-royal transition-all duration-300 ${className}`}
       style={{
         backgroundImage: `radial-gradient(circle at 50% 0%, rgba(184, 149, 85, 0.08) 0%, transparent 70%)`,
       }}
@@ -151,4 +164,3 @@ export const MandapArchFrame: React.FC<{
     </div>
   );
 };
-
