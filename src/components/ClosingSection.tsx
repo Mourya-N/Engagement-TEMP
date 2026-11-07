@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { INVITATION_CONFIG } from "@/config/invitation";
@@ -13,6 +13,13 @@ export const ClosingSection: React.FC = () => {
   const { t, isKannada } = useLanguage();
   const { couple, event } = INVITATION_CONFIG;
   const [copied, setCopied] = useState(false);
+  const [shareUrl, setShareUrl] = useState("https://kavana-sweekar-engagement.in");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setShareUrl(window.location.href);
+    }
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -24,7 +31,7 @@ export const ClosingSection: React.FC = () => {
       text: isKannada
         ? `ನಮಸ್ಕಾರ! ಕವನ ಮತ್ತು ಸ್ವೀಕಾರ್ ಅವರ ಶುಭ ನಿಶ್ಚಿತಾರ್ಥ ಮಹೋತ್ಸವದ ಆಮಂತ್ರಣ ಪತ್ರಿಕೆ ಇಲ್ಲಿದೆ. ದಿನಾಂಕ: ೨೪ ಜನವರಿ ೨೦೨೭, ನಂದಗೋಕುಲ ಪಾರ್ಟಿ ಹಾಲ್, ಚನ್ನರಾಯಪಟ್ಟಣ.`
         : `Namaskara! You are cordially invited to the Engagement Ceremony of Kavana & Sweekar on Sunday, January 24, 2027 at Nandagokula Party Hall, Channarayapatna, Hassan.`,
-      url: typeof window !== "undefined" ? window.location.href : "https://kavana-sweekar-engagement.in",
+      url: shareUrl,
     };
 
     if (navigator.share) {
@@ -36,7 +43,7 @@ export const ClosingSection: React.FC = () => {
     } else {
       // Fallback: copy link
       if (typeof window !== "undefined") {
-        navigator.clipboard.writeText(window.location.href);
+        navigator.clipboard.writeText(shareUrl);
         setCopied(true);
         setTimeout(() => setCopied(false), 2500);
       }
@@ -45,8 +52,8 @@ export const ClosingSection: React.FC = () => {
 
   const getWhatsAppShareUrl = () => {
     const message = isKannada
-      ? `ನಮಸ್ಕಾರ! ಕವನ ಮತ್ತು ಸ್ವೀಕಾರ್ ಅವರ ಶುಭ ನಿಶ್ಚಿತಾರ್ಥ ಮಹೋತ್ಸವಕ್ಕೆ ಸಕುಟುಂಬ ಸಮೇತರಾಗಿ ಆಗಮಿಸಿ ನವಜೋಡಿಯನ್ನು ಹರಸಬೇಕಾಗಿ ವಿನಂತಿ.\n\nದಿನಾಂಕ: ಭಾನುವಾರ, ೨೪ ಜನವರಿ ೨೦೨೭\nಸ್ಥಳ: ನಂದಗೋಕುಲ ಪಾರ್ಟಿ ಹಾಲ್, ಚನ್ನರಾಯಪಟ್ಟಣ, ಹಾಸನ.\nಆಮಂತ್ರಣ ಪತ್ರಿಕೆ ವೀಕ್ಷಿಸಿ: ${typeof window !== "undefined" ? window.location.href : ""}`
-      : `Namaskara! Cordially inviting you and your family to the auspicious Engagement Ceremony of Kavana & Sweekar.\n\nDate: Sunday, January 24, 2027\nVenue: Nandagokula Party Hall, Channarayapatna, Hassan.\nView Invitation: ${typeof window !== "undefined" ? window.location.href : ""}`;
+      ? `ನಮಸ್ಕಾರ! ಕವನ ಮತ್ತು ಸ್ವೀಕಾರ್ ಅವರ ಶುಭ ನಿಶ್ಚಿತಾರ್ಥ ಮಹೋತ್ಸವಕ್ಕೆ ಸಕುಟುಂಬ ಸಮೇತರಾಗಿ ಆಗಮಿಸಿ ನವಜೋಡಿಯನ್ನು ಹರಸಬೇಕಾಗಿ ವಿನಂತಿ.\n\nದಿನಾಂಕ: ಭಾನುವಾರ, ೨೪ ಜನವರಿ ೨೦೨೭\nಸ್ಥಳ: ನಂದಗೋಕುಲ ಪಾರ್ಟಿ ಹಾಲ್, ಚನ್ನರಾಯಪಟ್ಟಣ, ಹಾಸನ.\nಆಮಂತ್ರಣ ಪತ್ರಿಕೆ ವೀಕ್ಷಿಸಿ: ${shareUrl}`
+      : `Namaskara! Cordially inviting you and your family to the auspicious Engagement Ceremony of Kavana & Sweekar.\n\nDate: Sunday, January 24, 2027\nVenue: Nandagokula Party Hall, Channarayapatna, Hassan.\nView Invitation: ${shareUrl}`;
 
     return `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
   };
@@ -149,6 +156,7 @@ export const ClosingSection: React.FC = () => {
             href={getWhatsAppShareUrl()}
             target="_blank"
             rel="noopener noreferrer"
+            suppressHydrationWarning
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald hover:bg-emerald-light text-ivory text-xs sm:text-sm font-semibold tracking-wide shadow-md transition-all cursor-pointer"
           >
             <MessageCircle className="w-4 h-4" />

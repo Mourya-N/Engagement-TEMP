@@ -97,7 +97,7 @@ export const en = {
   scheduleMuhurthamDesc: "Sacred Vedic rituals, exchanging of auspicious engagement rings, and eternal vows.",
   scheduleBlessingsTitle: "Akshate & Family Blessings",
   scheduleBlessingsDesc: "Offering of sacred Akshate, family portraits, and heartfelt congratulations.",
-  scheduleFeastTitle: "Royal Festive Feast",
+  scheduleFeastTitle: "Festive Feast",
   scheduleFeastDesc: "Authentic traditional celebratory lunch served on plantain leaves with festive warmth.",
 
   // Photo Gallery Section
@@ -147,7 +147,7 @@ export const en = {
   closingHeading: "With Sincere Gratitude",
   closingMessage: "Your presence, prayers, and heartfelt blessings will make our engagement ceremony truly memorable. We eagerly await your arrival to celebrate together.",
   closingCoupleSign: "Kavana & Sweekar",
-  closingFamilySign: "KURUBA Family & Relatives",
+  closingFamilySign: "Family & Relatives",
   closingBlessing: "|| ಶುಭಮಸ್ತು || May Auspiciousness Prevail",
   musicPlaying: "Music Playing",
   musicMuted: "Music Muted",
