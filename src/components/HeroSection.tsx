@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { INVITATION_CONFIG } from "@/config/invitation";
 import { RoyalDivider, RoyalCornerFlourish } from "./DecorativeBorders";
+import { RoyalMonogramLogo } from "./RoyalMonogramLogo";
 import { Calendar, MapPin, ChevronDown, Sparkles } from "lucide-react";
 
 export const HeroSection: React.FC = () => {
@@ -125,9 +126,9 @@ export const HeroSection: React.FC = () => {
             <RoyalCornerFlourish position="bottom-right" className="bottom-1 right-1" />
           </div>
 
-          {/* Monogram Badge at Bottom Center */}
-          <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-ivory-light border-2 border-gold shadow-md flex items-center justify-center text-burgundy font-serif font-bold text-base">
-            {isKannada ? couple.monogramKn : couple.monogram}
+          {/* Aesthetic Royal Monogram Logo Badge at Bottom Center */}
+          <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 p-1 rounded-full bg-ivory-light border-2 border-gold shadow-lg flex items-center justify-center">
+            <RoyalMonogramLogo size="md" isKannada={isKannada} variant="crest" />
           </div>
         </motion.div>
 
@@ -136,7 +137,7 @@ export const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-espresso font-semibold"
+          className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-espresso font-semibold"
         >
           <div className="flex items-center gap-2 bg-ivory-light/95 px-5 py-2.5 rounded-full border border-gold/50 shadow-xs">
             <Calendar className="w-4 h-4 text-gold-dark" />

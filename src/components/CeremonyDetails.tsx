@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { INVITATION_CONFIG } from "@/config/invitation";
@@ -16,11 +16,17 @@ import {
   ExternalLink,
   Download,
   Shirt,
+  Navigation,
 } from "lucide-react";
 
 export const CeremonyDetails: React.FC = () => {
   const { t, isKannada } = useLanguage();
   const { event, couple } = INVITATION_CONFIG;
+
+  const googleMapsUrl = "https://maps.app.goo.gl/HYsMCpFWu63V42vh9?g_st=ac";
+  const appleMapsUrl = "https://maps.apple.com/?q=Nandagokula+Party+Hall&ll=12.898681,76.391895";
+  const mapsEmbedUrl =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.1405734944983!2d76.39189537507507!3d12.898681087409749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba55ff76b663a8b%3A0x1b52718bfba7c3cb!2sNandagokula%20Party%20Hall!5e0!3m2!1sen!2sin!4v1794068211755!5m2!1sen!2sin";
 
   // Icon mapping
   const getIcon = (name: string) => {
@@ -43,8 +49,6 @@ export const CeremonyDetails: React.FC = () => {
     const title = encodeURIComponent(
       `Engagement Ceremony: ${couple.bride.firstName} & ${couple.groom.firstName}`
     );
-    // Start: 2027-01-24 10:30 AM IST (05:00 UTC) -> 20270124T050000Z
-    // End: 2027-01-24 02:30 PM IST (09:00 UTC) -> 20270124T090000Z
     const dates = "20270124T050000Z/20270124T090000Z";
     const details = encodeURIComponent(
       `Traditional Engagement Ceremony of ${couple.bride.fullName} and ${couple.groom.fullName}. Venue: ${event.venueName}, ${event.address}.`
@@ -84,6 +88,18 @@ export const CeremonyDetails: React.FC = () => {
     link.click();
     document.body.removeChild(link);
     window.URL.revokeObjectURL(url);
+  };
+
+  // Smart map opener: checks device or defaults to Google Maps
+  const handleAddressClick = () => {
+    if (typeof window !== "undefined") {
+      const isApple = /(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgent);
+      if (isApple) {
+        window.open(appleMapsUrl, "_blank");
+      } else {
+        window.open(googleMapsUrl, "_blank");
+      }
+    }
   };
 
   return (
@@ -169,10 +185,16 @@ export const CeremonyDetails: React.FC = () => {
               </div>
             </div>
 
-            {/* Venue & Full Address Box */}
-            <div className="my-6 p-5 sm:p-6 rounded-2xl bg-ivory border-2 border-gold/50 shadow-sm max-w-xl w-full">
-              <div className="flex items-center justify-center gap-2 mb-2 text-burgundy">
-                <MapPin className="w-5 h-5 text-gold-dark" />
+            {/* Clickable Venue & Full Address Box */}
+            <div
+              onClick={handleAddressClick}
+              role="button"
+              tabIndex={0}
+              className="group my-6 p-5 sm:p-6 rounded-2xl bg-ivory border-2 border-gold/50 hover:border-gold hover:shadow-royal-gold shadow-sm max-w-xl w-full cursor-pointer transition-all duration-300"
+              title={isKannada ? "ಮ್ಯಾಪ್‌ನಲ್ಲಿ ವೀಕ್ಷಿಸಲು ಕ್ಲಿಕ್ ಮಾಡಿ" : "Click to open in Google Maps / Apple Maps"}
+            >
+              <div className="flex items-center justify-center gap-2 mb-2 text-burgundy group-hover:text-burgundy-light transition-colors">
+                <MapPin className="w-5 h-5 text-gold-dark group-hover:scale-110 transition-transform" />
                 <h4
                   className={`text-lg sm:text-xl font-serif font-bold ${
                     isKannada ? "font-kannadaSerif" : ""
@@ -181,25 +203,69 @@ export const CeremonyDetails: React.FC = () => {
                   {isKannada ? event.venueNameKn : event.venueName}
                 </h4>
               </div>
+
               <p
-                className={`text-xs sm:text-sm text-espresso/90 leading-relaxed font-medium ${
+                className={`text-xs sm:text-sm text-espresso/90 leading-relaxed font-medium group-hover:text-espresso transition-colors ${
                   isKannada ? "font-kannadaSans" : ""
                 }`}
               >
                 {isKannada ? event.addressKn : event.address}
               </p>
+
+              <div className="mt-3 inline-flex items-center gap-1.5 text-xs text-gold-dark font-semibold group-hover:text-burgundy transition-colors">
+                <Navigation className="w-3.5 h-3.5" />
+                <span>{isKannada ? "ಮ್ಯಾಪ್ಸ್‌ನಲ್ಲಿ ತೆರೆಯಿರಿ (ಗೂಗಲ್ / ಆ್ಯಪಲ್ ಮ್ಯಾಪ್ಸ್)" : "Open in Google Maps / Apple Maps"}</span>
+                <ExternalLink className="w-3 h-3 opacity-70" />
+              </div>
+            </div>
+
+            {/* Embedded Responsive Google Map */}
+            <div className="w-full max-w-2xl my-4 rounded-2xl overflow-hidden border-2 border-gold/60 shadow-royal bg-ivory">
+              <div className="bg-ivory-light px-4 py-2 border-b border-gold/40 flex items-center justify-between text-xs font-semibold text-espresso">
+                <div className="flex items-center gap-1.5 text-gold-dark">
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>{isKannada ? "ಸ್ಥಳದ ನಕ್ಷೆ" : "Interactive Location Map"}</span>
+                </div>
+                <span className="text-[11px] text-espresso/60 font-normal">
+                  Channarayapatna, Hassan
+                </span>
+              </div>
+              <div className="relative aspect-[16/9] w-full">
+                <iframe
+                  src={mapsEmbedUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  title="Nandagokula Party Hall Venue Location Map"
+                  className="w-full h-full"
+                />
+              </div>
             </div>
 
             {/* Action Buttons: Maps & Calendar */}
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 my-2">
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 my-4">
               <a
-                href={event.googleMapsUrl}
+                href={googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-burgundy hover:bg-burgundy-light text-ivory text-xs sm:text-sm font-bold tracking-wide shadow-md hover:shadow-lg transition-all cursor-pointer"
               >
                 <MapPin className="w-4 h-4 text-gold-light" />
-                <span>{t("btnViewLocation")}</span>
+                <span>Google Maps</span>
+                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+              </a>
+
+              <a
+                href={appleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-ivory border-2 border-gold/60 hover:border-gold text-espresso hover:text-burgundy text-xs sm:text-sm font-bold tracking-wide shadow-xs transition-all cursor-pointer"
+              >
+                <Navigation className="w-4 h-4 text-gold-dark" />
+                <span>Apple Maps</span>
                 <ExternalLink className="w-3.5 h-3.5 opacity-80" />
               </a>
 

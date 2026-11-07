@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useAudio } from "@/context/AudioContext";
 import { INVITATION_CONFIG } from "@/config/invitation";
+import { RoyalMonogramLogo } from "./RoyalMonogramLogo";
 import { Menu, X, Volume2, VolumeX } from "lucide-react";
 
 export const Navbar: React.FC = () => {
@@ -32,7 +33,6 @@ export const Navbar: React.FC = () => {
     { href: "#countdown", label: t("navCountdown") },
     { href: "#ceremony", label: t("navDetails") },
     { href: "#gallery", label: t("navGallery") },
-    // { href: "#rsvp", label: t("navRsvp"), highlight: true }, // RSVP temporarily commented out
   ];
 
   const handleNavClick = (href: string) => {
@@ -47,26 +47,18 @@ export const Navbar: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? "bg-ivory/95 backdrop-blur-md shadow-md border-b border-gold/30 py-2.5"
-          : "bg-transparent py-4"
+          ? "bg-ivory/95 backdrop-blur-md shadow-md border-b border-gold/30 py-2"
+          : "bg-transparent py-3.5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Monogram */}
+        {/* Brand Royal Monogram Logo */}
         <button
           onClick={() => handleNavClick("#hero")}
           className="flex items-center gap-2.5 group text-left cursor-pointer focus:outline-none"
           aria-label="Back to top"
         >
-          <div className="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center bg-ivory-light shadow-sm group-hover:border-burgundy transition-colors">
-            <span
-              className={`text-burgundy font-serif font-bold text-base tracking-wider ${
-                isKannada ? "font-kannadaSerif text-sm" : ""
-              }`}
-            >
-              {isKannada ? INVITATION_CONFIG.couple.monogramKn : INVITATION_CONFIG.couple.monogram}
-            </span>
-          </div>
+          <RoyalMonogramLogo size="sm" isKannada={isKannada} variant="crest" className="transition-transform group-hover:scale-105" />
           <div className="hidden xs:flex flex-col">
             <span
               className={`text-[10px] uppercase tracking-[0.2em] text-gold-dark font-semibold ${

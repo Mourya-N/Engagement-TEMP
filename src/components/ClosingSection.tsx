@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { INVITATION_CONFIG } from "@/config/invitation";
 import { RoyalDivider, RoyalCornerFlourish } from "./DecorativeBorders";
+import { RoyalMonogramLogo } from "./RoyalMonogramLogo";
 import { Heart, Share2, Check, MessageCircle } from "lucide-react";
 
 export const ClosingSection: React.FC = () => {
@@ -108,14 +109,8 @@ export const ClosingSection: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="my-4 inline-flex flex-col items-center"
         >
-          <div className="w-16 h-16 rounded-full border-2 border-gold flex items-center justify-center bg-espresso-light mb-3 shadow-royal-gold">
-            <span
-              className={`text-gold font-serif font-bold text-xl tracking-widest ${
-                isKannada ? "font-kannadaSerif text-lg" : ""
-              }`}
-            >
-              {isKannada ? couple.monogramKn : couple.monogram}
-            </span>
+          <div className="p-2 rounded-full border-2 border-gold flex items-center justify-center bg-espresso-light mb-3 shadow-royal-gold">
+            <RoyalMonogramLogo size="lg" isKannada={isKannada} variant="crest" />
           </div>
 
           <h3

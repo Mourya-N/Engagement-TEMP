@@ -6,7 +6,8 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useAudio } from "@/context/AudioContext";
 import { INVITATION_CONFIG } from "@/config/invitation";
 import { RoyalCornerFlourish } from "./DecorativeBorders";
-import { Sparkles, ArrowDown } from "lucide-react";
+import { RoyalMonogramLogo } from "./RoyalMonogramLogo";
+import { ArrowDown } from "lucide-react";
 
 interface EnvelopeOpeningProps {
   onOpenComplete?: () => void;
@@ -126,15 +127,14 @@ export const EnvelopeOpening: React.FC<EnvelopeOpeningProps> = ({ onOpenComplete
             initial={{ y: 0, scale: 0.94 }}
             animate={isOpen ? { y: -115, scale: 1 } : { y: 0, scale: 0.94 }}
             transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-x-3 sm:inset-x-5 top-2 bottom-2 bg-gradient-to-b from-[#FFFDF9] to-[#FBF6EC] border-2 border-gold/70 rounded-2xl shadow-2xl p-5 sm:p-7 flex flex-col items-center justify-center text-center z-10"
+            className="absolute inset-x-3 sm:inset-x-5 top-2 bottom-2 bg-gradient-to-b from-[#FFFDF9] to-[#FBF6EC] border-2 border-gold/70 rounded-2xl shadow-2xl p-4 sm:p-6 flex flex-col items-center justify-center text-center z-10"
           >
             <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-gold-dark font-semibold">
               {isKannada ? "|| ಶ್ರೀ ಮಂಜುನಾಥ ಸ್ವಾಮಿ ಪ್ರಸನ್ನ ||" : "|| SHREE MANJUNATHA SWAMY PRASANNA ||"}
             </span>
 
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-gold flex items-center justify-center my-2 text-burgundy font-serif font-bold text-lg sm:text-xl shadow-xs bg-ivory">
-              {isKannada ? INVITATION_CONFIG.couple.monogramKn : INVITATION_CONFIG.couple.monogram}
-            </div>
+            {/* Bespoke Royal Logo inside Card */}
+            <RoyalMonogramLogo size="md" isKannada={isKannada} variant="crest" className="my-1.5" />
 
             <p className="text-[11px] sm:text-xs uppercase tracking-widest text-espresso/70 font-semibold mb-0.5">
               {isKannada ? INVITATION_CONFIG.event.titleKn : INVITATION_CONFIG.event.title}
@@ -212,7 +212,7 @@ export const EnvelopeOpening: React.FC<EnvelopeOpeningProps> = ({ onOpenComplete
             />
           </motion.div>
 
-          {/* Interactive Royal Gold Wax Seal */}
+          {/* Interactive Royal Gold Wax Seal with Aesthetic K & S Logo */}
           <motion.button
             onClick={handleOpen}
             whileHover={{ scale: 1.08 }}
@@ -227,20 +227,10 @@ export const EnvelopeOpening: React.FC<EnvelopeOpeningProps> = ({ onOpenComplete
                 ? { duration: 0.45 }
                 : { repeat: Infinity, duration: 3.2, ease: "easeInOut" }
             }
-            className="absolute top-[49%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 w-18 h-18 sm:w-22 sm:h-22 rounded-full bg-gradient-to-tr from-[#4A141E] via-[#641F2C] to-[#882C3D] border-[3px] border-[#D4AF37] text-ivory flex items-center justify-center shadow-wax-seal cursor-pointer group focus:outline-none focus:ring-4 focus:ring-gold/60"
+            className="absolute top-[49%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center cursor-pointer group focus:outline-none focus:ring-4 focus:ring-gold/60"
             aria-label={t("openInvitation")}
           >
-            {/* Outer embossed ring */}
-            <div className="absolute inset-1 rounded-full border border-gold/60 border-dashed" />
-            <div className="absolute -inset-1.5 rounded-full border border-gold/25 animate-spin" style={{ animationDuration: '24s' }} />
-
-            <div className="flex flex-col items-center justify-center text-center select-none">
-              <span className="text-[10px] text-gold-light tracking-widest leading-none mb-0.5">✦ ॐ ✦</span>
-              <span className="text-gold font-serif font-bold text-base sm:text-lg tracking-wider leading-none">
-                {isKannada ? INVITATION_CONFIG.couple.monogramKn : INVITATION_CONFIG.couple.monogram}
-              </span>
-              <Sparkles className="w-3.5 h-3.5 text-gold-light mt-0.5 opacity-90" />
-            </div>
+            <RoyalMonogramLogo size="lg" isKannada={isKannada} variant="seal" />
           </motion.button>
         </div>
 
