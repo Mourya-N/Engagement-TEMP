@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { INVITATION_CONFIG } from "@/config/invitation";
 import { RoyalDivider, RoyalCornerFlourish } from "./DecorativeBorders";
-import { Calendar, MapPin, ChevronDown } from "lucide-react";
+import { Calendar, MapPin, ChevronDown, Sparkles } from "lucide-react";
 
 export const HeroSection: React.FC = () => {
   const { t, isKannada } = useLanguage();
@@ -22,18 +22,18 @@ export const HeroSection: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-16 px-4 overflow-hidden bg-ivory"
+      className="relative min-h-screen flex flex-col items-center justify-center pt-24 pb-16 px-4 overflow-hidden bg-ivory"
       style={{
-        backgroundImage: `radial-gradient(ellipse at 50% 30%, rgba(253, 251, 247, 0.95), rgba(248, 241, 229, 0.98))`,
+        backgroundImage: `radial-gradient(ellipse at 50% 25%, rgba(253, 251, 247, 0.98), rgba(246, 238, 224, 0.98))`,
       }}
     >
-      {/* Subtle royal background watermark arch */}
+      {/* Royal Arch Background Watermark */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.035] flex items-center justify-center"
+        className="pointer-events-none absolute inset-0 opacity-[0.04] flex items-center justify-center"
         aria-hidden="true"
       >
-        <svg viewBox="0 0 500 700" className="w-[85vw] max-w-[650px] text-espresso" fill="currentColor">
-          <path d="M250 50 C120 50, 40 180, 40 350 L40 700 L460 700 L460 350 C460 180, 380 50, 250 50 Z" />
+        <svg viewBox="0 0 500 700" className="w-[90vw] max-w-[700px] text-espresso" fill="currentColor">
+          <path d="M250 40 C120 40, 30 170, 30 350 L30 700 L470 700 L470 350 C470 170, 380 40, 250 40 Z" />
         </svg>
       </div>
 
@@ -43,10 +43,14 @@ export const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-3"
+          className="mb-3.5"
         >
-          <span className="inline-block text-xs sm:text-sm uppercase tracking-[0.25em] text-gold-dark font-medium px-4 py-1.5 rounded-full border border-gold/40 bg-ivory-light/80 shadow-xs">
-            {isKannada ? "|| ಶ್ರೀ ಗಣೇಶಾಯ ನಮಃ ||" : "|| SHREE GANESHAYA NAMAHA ||"}
+          <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm uppercase tracking-[0.25em] text-gold-dark font-semibold px-5 py-2 rounded-full border-2 border-gold/40 bg-ivory-light/90 shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-gold" />
+            <span>
+              {isKannada ? "|| ಶ್ರೀ ಮಂಜುನಾಥ ಸ್ವಾಮಿ ಪ್ರಸನ್ನ ||" : "|| SHREE MANJUNATHA SWAMY PRASANNA ||"}
+            </span>
+            <Sparkles className="w-3.5 h-3.5 text-gold" />
           </span>
         </motion.div>
 
@@ -55,7 +59,7 @@ export const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className={`text-xs sm:text-sm uppercase tracking-[0.2em] text-espresso/70 mb-2 font-medium ${
+          className={`text-xs sm:text-sm uppercase tracking-[0.22em] text-espresso/70 mb-2 font-semibold ${
             isKannada ? "font-kannadaSans tracking-normal text-sm sm:text-base" : ""
           }`}
         >
@@ -70,7 +74,7 @@ export const HeroSection: React.FC = () => {
           className="my-3 sm:my-4 flex flex-col md:flex-row items-center justify-center gap-2 sm:gap-4 md:gap-6"
         >
           <h1
-            className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-burgundy tracking-wide ${
+            className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-burgundy tracking-wide drop-shadow-xs ${
               isKannada ? "font-kannadaSerif" : ""
             }`}
           >
@@ -78,13 +82,13 @@ export const HeroSection: React.FC = () => {
           </h1>
 
           <div className="flex items-center justify-center my-1 md:my-0">
-            <span className="text-3xl sm:text-4xl md:text-5xl font-serif italic text-gold px-2">
+            <span className="text-3xl sm:text-4xl md:text-5xl font-serif italic text-gold px-3 select-none">
               &
             </span>
           </div>
 
           <h1
-            className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-burgundy tracking-wide ${
+            className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-burgundy tracking-wide drop-shadow-xs ${
               isKannada ? "font-kannadaSerif" : ""
             }`}
           >
@@ -102,16 +106,16 @@ export const HeroSection: React.FC = () => {
           transition={{ duration: 1, delay: 0.4 }}
           className="relative my-4 sm:my-6 group"
         >
-          {/* Ornamental Mandap Outer Frame */}
-          <div className="relative p-2.5 sm:p-3 rounded-t-[140px] sm:rounded-t-[180px] rounded-b-3xl bg-gradient-to-b from-gold/50 via-gold/30 to-gold/60 shadow-royal">
-            <div className="relative overflow-hidden rounded-t-[132px] sm:rounded-t-[172px] rounded-b-2xl w-[260px] sm:w-[320px] md:w-[380px] aspect-[4/5] bg-ivory-dark">
+          {/* Ornamental Mandap Arch Frame */}
+          <div className="relative p-3 rounded-t-[140px] sm:rounded-t-[180px] rounded-b-3xl bg-gradient-to-b from-gold/60 via-gold/35 to-gold/70 shadow-royal">
+            <div className="relative overflow-hidden rounded-t-[132px] sm:rounded-t-[172px] rounded-b-2xl w-[260px] sm:w-[320px] md:w-[390px] aspect-[4/5] bg-ivory-dark">
               <Image
                 src={couple.heroImage}
                 alt={`${couple.bride.fullName} and ${couple.groom.fullName}`}
                 fill
                 priority
-                sizes="(max-width: 640px) 260px, (max-width: 768px) 320px, 380px"
-                className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 640px) 260px, (max-width: 768px) 320px, 390px"
+                className="object-cover object-top transition-transform duration-700 group-hover:scale-106"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-espresso/40 via-transparent to-transparent pointer-events-none" />
             </div>
@@ -132,15 +136,15 @@ export const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-espresso font-medium"
+          className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-espresso font-semibold"
         >
-          <div className="flex items-center gap-2 bg-ivory-light/90 px-4 py-2 rounded-full border border-gold/40 shadow-xs">
+          <div className="flex items-center gap-2 bg-ivory-light/95 px-5 py-2.5 rounded-full border border-gold/50 shadow-xs">
             <Calendar className="w-4 h-4 text-gold-dark" />
             <span>{isKannada ? event.dateFormattedKn : event.dateFormatted}</span>
           </div>
-          <div className="flex items-center gap-2 bg-ivory-light/90 px-4 py-2 rounded-full border border-gold/40 shadow-xs">
+          <div className="flex items-center gap-2 bg-ivory-light/95 px-5 py-2.5 rounded-full border border-gold/50 shadow-xs">
             <MapPin className="w-4 h-4 text-gold-dark" />
-            <span>{isKannada ? event.cityKn : event.city}</span>
+            <span>{isKannada ? event.venueNameKn : event.venueName}, {isKannada ? event.cityKn : event.city}</span>
           </div>
         </motion.div>
 
@@ -157,4 +161,3 @@ export const HeroSection: React.FC = () => {
     </section>
   );
 };
-

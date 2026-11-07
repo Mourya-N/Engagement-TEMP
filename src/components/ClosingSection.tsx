@@ -19,7 +19,7 @@ export const ClosingSection: React.FC = () => {
     <footer
       className="relative py-20 sm:py-28 px-4 bg-espresso text-ivory text-center overflow-hidden"
       style={{
-        backgroundImage: `radial-gradient(circle at 50% 30%, rgba(78, 60, 52, 0.95), rgba(38, 28, 24, 0.98)), url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23B89555' fill-opacity='0.06' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E")`,
+        backgroundImage: `radial-gradient(circle at 50% 30%, rgba(78, 60, 52, 0.98), rgba(38, 28, 24, 0.99)), url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23B89555' fill-opacity='0.08' fill-rule='evenodd'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E")`,
       }}
     >
       <RoyalCornerFlourish position="top-left" className="top-4 left-4 text-gold opacity-50" />
@@ -59,7 +59,7 @@ export const ClosingSection: React.FC = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className={`text-sm sm:text-base md:text-lg text-ivory/80 leading-relaxed font-serif italic mb-8 ${
+          className={`text-sm sm:text-base md:text-lg text-ivory/85 leading-relaxed font-serif italic mb-8 max-w-xl mx-auto ${
             isKannada ? "font-kannadaSerif not-italic" : ""
           }`}
         >
@@ -95,7 +95,7 @@ export const ClosingSection: React.FC = () => {
           </h3>
 
           <p
-            className={`text-xs uppercase tracking-widest text-ivory/60 mt-1 font-medium ${
+            className={`text-xs uppercase tracking-widest text-ivory/70 mt-1 font-semibold ${
               isKannada ? "font-kannadaSans normal-case text-sm" : ""
             }`}
           >
@@ -120,4 +120,3 @@ export const ClosingSection: React.FC = () => {
     </footer>
   );
 };
-
