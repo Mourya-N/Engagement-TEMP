@@ -20,15 +20,47 @@ export const HeroSection: React.FC = () => {
   const { t, isKannada } = useLanguage();
   const { couple, event } = INVITATION_CONFIG;
   const [mounted, setMounted] = React.useState(false);
+  const [isMovedToNavbar, setIsMovedToNavbar] = React.useState(false);
 
   React.useEffect(() => {
     setMounted(true);
+
+    const handleInvitationOpened = () => {
+      // After 3 seconds, move the big logo to the left corner in nav bar and auto scroll until
+      // the shree beeralingeshwara swamy prasanna tag comes near nav bar
+      const timer = setTimeout(() => {
+        setIsMovedToNavbar(true);
+
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new CustomEvent("invitation-dock-logo"));
+          const tag = document.getElementById("beeralingeshwara-tag");
+          if (tag) {
+            const targetY = tag.getBoundingClientRect().top + window.scrollY - 74;
+            window.scrollTo({ top: Math.max(0, targetY), behavior: "smooth" });
+          }
+        }
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    };
+
+    window.addEventListener("invitation-opened", handleInvitationOpened);
+    return () => window.removeEventListener("invitation-opened", handleInvitationOpened);
   }, []);
 
   const { scrollY } = useScroll();
-  // Logo starts big when opening the invitation (1.38x), then scales down smoothly on scroll to standard size (0.95x)
-  const logoScale = useTransform(scrollY, [0, 260], [1.38, 0.95]);
-  const logoOpacity = useTransform(scrollY, [0, 400], [1, 0.9]);
+
+  React.useEffect(() => {
+    const unsubscribe = scrollY.on("change", (latest) => {
+      if (latest > 50 && !isMovedToNavbar) {
+        setIsMovedToNavbar(true);
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new CustomEvent("invitation-dock-logo"));
+        }
+      }
+    });
+    return () => unsubscribe();
+  }, [scrollY, isMovedToNavbar]);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -64,9 +96,19 @@ export const HeroSection: React.FC = () => {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center text-center">
-        {/* Grand Royal Monogram Logo (Displayed Big upon opening, smoothly scaling down on scroll) */}
+        {/* Grand Royal Monogram Logo (Displayed Big upon opening, moves to left corner in nav bar after 3 seconds) */}
         <motion.div
-          style={mounted ? { scale: logoScale, opacity: logoOpacity } : { scale: 1.38, opacity: 1 }}
+          animate={
+            isMovedToNavbar
+              ? {
+                  x: typeof window !== "undefined" ? -window.innerWidth / 2 + 56 : -300,
+                  y: -95,
+                  scale: 0.38,
+                  opacity: 0,
+                }
+              : { x: 0, y: 0, scale: 1.35, opacity: 1 }
+          }
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
           className="mb-4 flex flex-col items-center cursor-pointer origin-center"
         >
           <div className="p-3 sm:p-3.5 rounded-full bg-gradient-to-br from-ivory-light via-ivory to-ivory-dark border-2 border-gold shadow-royal-gold hover:shadow-2xl transition-all">
@@ -76,10 +118,11 @@ export const HeroSection: React.FC = () => {
 
         {/* Auspicious Mangala Inscription with Golden Diyas / Sparkles */}
         <motion.div
+          id="beeralingeshwara-tag"
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-4"
+          className="mb-4 scroll-mt-20"
         >
           <span className="inline-flex items-center gap-2 text-xs sm:text-sm uppercase tracking-[0.25em] text-gold-dark font-bold px-6 py-2.5 rounded-full border-2 border-gold/60 bg-ivory-light/95 shadow-md">
             <Sparkles className="w-4 h-4 text-gold-dark" />
@@ -274,23 +317,6 @@ export const HeroSection: React.FC = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-gold/0 via-gold/0 to-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                   </div>
                 </div>
-              </div>
-
-              {/* Decorative top crown ornament on frame */}
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
-                <svg width="60" height="28" viewBox="0 0 60 28" fill="none">
-                  <path d="M30 2 L38 14 L50 8 L46 22 L14 22 L10 8 L22 14 Z" fill="url(#crownGrad)" stroke="#96753A" strokeWidth="0.8" />
-                  <circle cx="30" cy="2" r="2.5" fill="#D4AF37" />
-                  <circle cx="50" cy="8" r="1.5" fill="#8A9A5B" />
-                  <circle cx="10" cy="8" r="1.5" fill="#8A9A5B" />
-                  <defs>
-                    <linearGradient id="crownGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#D4AF37" />
-                      <stop offset="50%" stopColor="#B88628" />
-                      <stop offset="100%" stopColor="#96753A" />
-                    </linearGradient>
-                  </defs>
-                </svg>
               </div>
             </div>
           </div>

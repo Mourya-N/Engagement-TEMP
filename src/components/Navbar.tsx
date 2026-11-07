@@ -12,18 +12,29 @@ export const Navbar: React.FC = () => {
   const { isPlaying, toggleAudio } = useAudio();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLogoDocked, setIsLogoDocked] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 40) {
         setIsScrolled(true);
+        setIsLogoDocked(true);
       } else {
         setIsScrolled(false);
       }
     };
 
+    const handleDock = () => {
+      setIsLogoDocked(true);
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("invitation-dock-logo", handleDock);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("invitation-dock-logo", handleDock);
+    };
   }, []);
 
   const navItems = [
@@ -53,10 +64,12 @@ export const Navbar: React.FC = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Royal Monogram Logo */}
+        {/* Brand Royal Monogram Logo (Glides into top-left corner as big logo docks) */}
         <button
           onClick={() => handleNavClick("#hero")}
-          className="flex items-center gap-2.5 group text-left cursor-pointer focus:outline-none"
+          className={`flex items-center gap-2.5 group text-left cursor-pointer focus:outline-none transition-all duration-700 ${
+            isScrolled || isLogoDocked ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-3 pointer-events-none"
+          }`}
           aria-label="Back to top"
         >
           <RoyalMonogramLogo size="sm" isKannada={isKannada} variant="crest" className="transition-transform group-hover:scale-105" />

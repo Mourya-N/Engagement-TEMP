@@ -22,59 +22,22 @@ export const EnvelopeOpening: React.FC<EnvelopeOpeningProps> = ({ onOpenComplete
   const [isOpening, setIsOpening] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
   const [showLogoAnimation, setShowLogoAnimation] = useState(false);
-  const [logoFlying, setLogoFlying] = useState(false);
-  const [windowSize, setWindowSize] = useState({ w: 0, h: 0 });
   const onOpenCompleteRef = useRef(onOpenComplete);
-  const checkedReloadRef = useRef(false);
 
   useEffect(() => {
     onOpenCompleteRef.current = onOpenComplete;
   }, [onOpenComplete]);
 
+  // When browser is refreshed, always reset to the Open Invitation envelope page
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const updateSize = () => {
-        setWindowSize({ w: window.innerWidth, h: window.innerHeight });
-      };
-      updateSize();
-      window.addEventListener("resize", updateSize);
-      return () => window.removeEventListener("resize", updateSize);
-    }
-  }, []);
-
-  // If anyone refreshes the page, immediately dismiss envelope and scroll to couple section
-  useEffect(() => {
-    if (checkedReloadRef.current) return;
-    checkedReloadRef.current = true;
-
-    if (typeof window !== "undefined") {
+      window.scrollTo(0, 0);
       try {
-        const navEntries = performance.getEntriesByType("navigation");
-        const isNavReload =
-          navEntries.length > 0 &&
-          (navEntries[0] as PerformanceNavigationTiming)?.type === "reload";
-        const hasOpenedInSession = sessionStorage.getItem("invitation_opened") === "true";
-        const hasHash =
-          window.location.hash === "#hero" || window.location.hash === "#couple";
-
-        if (isNavReload || hasOpenedInSession || hasHash) {
-          setIsDismissed(true);
-          setIsOpen(true);
-          if (onOpenCompleteRef.current) {
-            onOpenCompleteRef.current();
-          }
-
-          // Smoothly scroll straight to the couple section (#hero)
-          setTimeout(() => {
-            const heroEl = document.getElementById("hero");
-            if (heroEl) {
-              heroEl.scrollIntoView({ behavior: "smooth" });
-            }
-          }, 350);
+        sessionStorage.removeItem("invitation_opened");
+        if (window.location.hash) {
+          history.replaceState(null, "", window.location.pathname);
         }
-      } catch {
-        // Fallback gracefully without breaking
-      }
+      } catch {}
     }
   }, []);
 
@@ -88,44 +51,47 @@ export const EnvelopeOpening: React.FC<EnvelopeOpeningProps> = ({ onOpenComplete
       } catch {}
     }
 
-    // Show animated logo reveal instead of immediate confetti
+    // Show animated logo creation sequence
     setShowLogoAnimation(true);
   };
 
   const handleLogoComplete = () => {
-    // Start flying the logo to navbar
-    setLogoFlying(true);
-
-    // Play audio on user interaction
+    // Play background audio on user interaction
     playAudio();
 
-    // Celebratory golden confetti burst
+    // Auspicious celebratory golden confetti burst
     try {
       confetti({
-        particleCount: 80,
-        spread: 100,
+        particleCount: 85,
+        spread: 110,
         origin: { y: 0.45 },
         colors: ["#D4AF37", "#96753A", "#641F2C", "#F5E4B9", "#822B3B", "#556B2F", "#8A9A5B"],
-        startVelocity: 45,
+        startVelocity: 42,
         gravity: 0.9,
       });
     } catch {}
 
-    // After fly animation completes, open envelope → dismiss → scroll to hero
-    setTimeout(() => {
-      setIsOpen(true);
-    }, 300);
+    // Open the 3D envelope flap
+    setIsOpen(true);
 
+    // Transition smoothly directly into the couple section where the big logo is connected
     setTimeout(() => {
       setShowLogoAnimation(false);
-      setLogoFlying(false);
       setIsDismissed(true);
-      if (onOpenCompleteRef.current) onOpenCompleteRef.current();
+
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("invitation-opened"));
+      }
+
+      if (onOpenCompleteRef.current) {
+        onOpenCompleteRef.current();
+      }
+
       const heroEl = document.getElementById("hero");
       if (heroEl) {
         heroEl.scrollIntoView({ behavior: "smooth" });
       }
-    }, 950);
+    }, 700);
   };
 
   const handleSkip = () => {
@@ -133,6 +99,7 @@ export const EnvelopeOpening: React.FC<EnvelopeOpeningProps> = ({ onOpenComplete
     if (typeof window !== "undefined") {
       try {
         sessionStorage.setItem("invitation_opened", "true");
+        window.dispatchEvent(new CustomEvent("invitation-opened"));
       } catch {}
     }
     if (onOpenComplete) onOpenComplete();
@@ -402,23 +369,12 @@ export const EnvelopeOpening: React.FC<EnvelopeOpeningProps> = ({ onOpenComplete
                   />
                 ))}
 
-                {/* The Logo Animation — flies to navbar on complete */}
+                {/* The Logo Animation — seamlessly connects to the big logo in couple section */}
                 <motion.div
-                  animate={
-                    logoFlying
-                      ? {
-                          scale: 0.08,
-                          x: windowSize.w > 0 ? -windowSize.w / 2 + 48 : -600,
-                          y: windowSize.h > 0 ? -windowSize.h / 2 + 28 : -400,
-                          opacity: 0.9,
-                        }
-                      : { scale: 1, x: 0, y: 0, opacity: 1 }
-                  }
-                  transition={
-                    logoFlying
-                      ? { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
-                      : {}
-                  }
+                  initial={{ scale: 0.95, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 1.15, opacity: 0 }}
+                  transition={{ duration: 0.6 }}
                   className="relative z-10"
                 >
                   <AnimatedLogoReveal
@@ -431,7 +387,7 @@ export const EnvelopeOpening: React.FC<EnvelopeOpeningProps> = ({ onOpenComplete
                 {/* "Opening your invitation..." subtle label below logo */}
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
-                  animate={logoFlying ? { opacity: 0 } : { opacity: 1, y: 0 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8, duration: 0.6 }}
                   className={`absolute bottom-24 text-xs uppercase tracking-[0.3em] text-espresso/60 font-semibold ${isKannada ? "font-kannadaSans" : ""}`}
                 >
