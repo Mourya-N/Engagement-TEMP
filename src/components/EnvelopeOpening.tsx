@@ -34,9 +34,6 @@ export const EnvelopeOpening: React.FC<EnvelopeOpeningProps> = ({ onOpenComplete
       window.scrollTo(0, 0);
       try {
         sessionStorage.removeItem("invitation_opened");
-        if (window.location.hash) {
-          history.replaceState(null, "", window.location.pathname);
-        }
       } catch {}
     }
   }, []);

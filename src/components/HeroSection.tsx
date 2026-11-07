@@ -21,14 +21,26 @@ export const HeroSection: React.FC = () => {
   const { couple, event } = INVITATION_CONFIG;
   const [mounted, setMounted] = React.useState(false);
   const [isMovedToNavbar, setIsMovedToNavbar] = React.useState(false);
+  const [windowWidth, setWindowWidth] = React.useState(0);
+  const timerRef = React.useRef<NodeJS.Timeout | null>(null);
 
   React.useEffect(() => {
     setMounted(true);
+    if (typeof window !== "undefined") {
+      setWindowWidth(window.innerWidth);
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
 
+  React.useEffect(() => {
     const handleInvitationOpened = () => {
       // After 3 seconds, move the big logo to the left corner in nav bar and auto scroll until
       // the shree beeralingeshwara swamy prasanna tag comes near nav bar
-      const timer = setTimeout(() => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+
+      timerRef.current = setTimeout(() => {
         setIsMovedToNavbar(true);
 
         if (typeof window !== "undefined") {
@@ -40,12 +52,13 @@ export const HeroSection: React.FC = () => {
           }
         }
       }, 3000);
-
-      return () => clearTimeout(timer);
     };
 
     window.addEventListener("invitation-opened", handleInvitationOpened);
-    return () => window.removeEventListener("invitation-opened", handleInvitationOpened);
+    return () => {
+      window.removeEventListener("invitation-opened", handleInvitationOpened);
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, []);
 
   const { scrollY } = useScroll();
@@ -101,7 +114,7 @@ export const HeroSection: React.FC = () => {
           animate={
             isMovedToNavbar
               ? {
-                  x: typeof window !== "undefined" ? -window.innerWidth / 2 + 56 : -300,
+                  x: windowWidth > 0 ? -windowWidth / 2 + 56 : -300,
                   y: -95,
                   scale: 0.38,
                   opacity: 0,
