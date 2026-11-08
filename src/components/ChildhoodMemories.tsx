@@ -14,7 +14,7 @@ export const ChildhoodMemories: React.FC = () => {
 
   const childhoodData = couple.childhood || {
     brideImage: "/images/kavana-childhood.jpg",
-    groomImage: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=85",
+    groomImage: "/images/sweekar-childhood.jpg",
     brideAgeText: "Sweet Childhood Memories",
     brideAgeTextKn: "ಮುದ್ದು ಬಾಲ್ಯದ ಸವಿನೆನಪು",
     groomAgeText: "Golden Childhood Days",
