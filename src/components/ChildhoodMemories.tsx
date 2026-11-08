@@ -13,7 +13,7 @@ export const ChildhoodMemories: React.FC = () => {
   const { couple } = INVITATION_CONFIG;
 
   const childhoodData = couple.childhood || {
-    brideImage: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=85",
+    brideImage: "/images/kavana-childhood.jpg",
     groomImage: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=85",
     brideAgeText: "Sweet Childhood Memories",
     brideAgeTextKn: "ಮುದ್ದು ಬಾಲ್ಯದ ಸವಿನೆನಪು",
@@ -91,7 +91,7 @@ export const ChildhoodMemories: React.FC = () => {
                   alt="Little Kavana Childhood Portrait"
                   fill
                   sizes="(max-width: 640px) 280px, 320px"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105 filter sepia-[0.15] contrast-[1.05]"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-espresso/40 via-transparent to-transparent pointer-events-none" />
                 
@@ -149,7 +149,7 @@ export const ChildhoodMemories: React.FC = () => {
                   alt="Little Sweekar Childhood Portrait"
                   fill
                   sizes="(max-width: 640px) 280px, 320px"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105 filter sepia-[0.15] contrast-[1.05]"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-espresso/40 via-transparent to-transparent pointer-events-none" />
 

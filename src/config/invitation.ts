@@ -142,7 +142,7 @@ export const INVITATION_CONFIG: InvitationConfig = {
     heroImage: "/images/couple-hero.jpg",
     storyImage: "/images/couple-hero.jpg",
     childhood: {
-      brideImage: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=85",
+      brideImage: "/images/kavana-childhood.jpg",
       groomImage: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=85",
       brideAgeText: "Sweet Childhood Memories",
       brideAgeTextKn: "ಮುದ್ದು ಬಾಲ್ಯದ ಸವಿನೆನಪು",
